@@ -16,12 +16,12 @@ public class Player {
     private String goal;
 
 
-    public Player(String name, int salary, int position, String nationalaty){
+    public Player(String name, int salary, int position, String nationality){
 
         this.name = name;
         this.salary = salary;
         this.position = position;
-        this.nationalaty = nationalaty;
+        this.nationalaty = nationality;
     }
 
     public String getName() {
