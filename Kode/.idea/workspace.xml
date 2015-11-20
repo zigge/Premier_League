@@ -80,6 +80,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/Controller/Util.java" />
+        <option value="$PROJECT_DIR$/src/Controller/Statistics.java" />
       </list>
     </option>
   </component>
