@@ -8,13 +8,21 @@ public class Player {
     private String name;
     private int salary;
     private int position;
-    private String Nationalaty;
+    private String nationalaty;
     private int game;
     private int gamesWon;
     private int gamesLoss;
     private int ties;
     private String goal;
 
+
+    public Player(String name, int salary, int position, String nationalaty){
+
+        this.name = name;
+        this.salary = salary;
+        this.position = position;
+        this.nationalaty = nationalaty;
+    }
 
     public String getName() {
         return name;
@@ -25,7 +33,7 @@ public class Player {
     }
 
     public String getNationalaty() {
-        return Nationalaty;
+        return nationalaty;
     }
 
     public int getGame() {
@@ -57,7 +65,7 @@ public class Player {
     }
 
     public void setNationalaty(String nationalaty) {
-        Nationalaty = nationalaty;
+        nationalaty = nationalaty;
     }
 
     public void setGame(int game) {
