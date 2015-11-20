@@ -8,7 +8,7 @@ public class Player {
     private String name;
     private int salary;
     private int position;
-    private String nationalaty;
+    private String nationality;
     private int game;
     private int gamesWon;
     private int gamesLoss;
@@ -21,7 +21,7 @@ public class Player {
         this.name = name;
         this.salary = salary;
         this.position = position;
-        this.nationalaty = nationality;
+        this.nationality = nationality;
     }
 
     public String getName() {
@@ -33,7 +33,7 @@ public class Player {
     }
 
     public String getNationalaty() {
-        return nationalaty;
+        return nationality;
     }
 
     public int getGame() {
