@@ -58,14 +58,20 @@ public class Player {
         return goal;
     }
 
+    public String getPosition() {
+
+        return position;
+    }
+
     //Before this methode is called, call a method that displays positions on field!!!
     public void setPosition(int pos){ // Takes a int, witch is the position number fron the constructer: Positinon: int
-        if(pos < Util.fieldPosition.values().length || pos > 0){
-            position = Util.fieldPosition.valueOf()[pos].getPositionOnField();
+        if(pos < Util.fieldPosition.values().length || pos > 0){ // Gets the number of values of the enum: 4 in this case
+            position = Util.fieldPosition.values()[pos].getPositionOnField();
         }else{
             System.out.println("The position does not exists");
         }
     }
+
     public void setName(String name) {
         this.name = name;
     }
