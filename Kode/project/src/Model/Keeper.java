@@ -5,7 +5,19 @@ package Model;
  */
 public class Keeper extends Player {
 
-    public Keeper(String name, int salary, int position, String nationality) {
+    private int saves;
+
+
+    public Keeper(String name, int salary, int position, String nationality, int saves) {
         super(name, salary, position, nationality);
+        this.saves = saves;
+    }
+
+    public int getSaves() {
+        return saves;
+    }
+
+    public void setSaves(int saves) {
+        this.saves = saves;
     }
 }

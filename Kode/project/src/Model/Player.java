@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.Util;
+
 /**
  * Created by lassebjorklund on 20/11/15.
  */
@@ -7,7 +9,7 @@ public class Player {
 
     private String name;
     private int salary;
-    private int position;
+    private String position;
     private String nationality;
     private int game;
     private int gamesWon;
@@ -20,7 +22,7 @@ public class Player {
 
         this.name = name;
         this.salary = salary;
-        this.position = position;
+        setPosition(position); // Sets position number -> 1 = "Forward position" with a call to methode "setPosition()"
         this.nationality = nationality;
     }
 
@@ -56,6 +58,14 @@ public class Player {
         return goal;
     }
 
+    //Before this methode is called, call a method that displays positions on field!!!
+    public void setPosition(int pos){ // Takes a int, witch is the position number fron the constructer: Positinon: int
+        if(pos < Util.fieldPosition.values().length || pos > 0){
+            position = Util.fieldPosition.valueOf()[pos].getPositionOnField();
+        }else{
+            System.out.println("The position does not exists");
+        }
+    }
     public void setName(String name) {
         this.name = name;
     }
