@@ -16,6 +16,7 @@ public class MenuSystem {
 
     //Menu run class
    public static void menu() {
+       scan = new Scanner(System.in);
        running = true;
        // Run a check for player file!!
        //TODO Decide if this check is necessary.
@@ -34,8 +35,8 @@ public class MenuSystem {
            }
 
            //Menu print out
-           System.out.println("Welcome! \n Please select one of the menu point below:");
-           System.out.println("1: Games \n 2: Players \n 3: Quit ");
+           System.out.println("Welcome! \nPlease select one of the menu point below:");
+           System.out.println("1: Games \n2: Players \n3: Quit ");
            headMenu = scan.nextInt();
            switch (headMenu) {
                case 1:
