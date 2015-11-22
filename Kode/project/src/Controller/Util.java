@@ -30,11 +30,13 @@ public class Util {
 
     public Game loadGame(File locationOfGame){
         //Some code to load "Game"
+        return null;
     }
 
 
     public ArrayList<Player> loadPlayers(File locationOfPlayers){
         //Some code to load "players"
+        return null;
     }
 
 
