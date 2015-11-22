@@ -1,29 +1,47 @@
 package Model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 
 /**
  * Created by lassebjorklund on 21/11/15.
  */
 public class Game {
 
-    private Player player;
+    private ArrayList<Player> players;
     private String opposingTeam;
     private int result;
     private LocalDate gameTime;
-    private String playedGame;
 
 //    TODO: Verifiy this constructer
-    public Game(Player player, String opposingTeam, int result, LocalDate gameTime, String playedGame) {
-        this.player = player;
+    public Game(ArrayList<Player> player, String opposingTeam, int result, LocalDate gameTime) {
+//    TODO: Fill out constructor for game
         this.opposingTeam = opposingTeam;
         this.result = result;
         this.gameTime = gameTime;
-        this.playedGame = playedGame;
+        this.players = player;
+
     }
 //    TODO: Verifiy this constructer
     public Game(String opposingTeam, LocalDate gameTime) {
         this.opposingTeam = opposingTeam;
         this.gameTime = gameTime;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public String getOpposingTeam() {
+        return opposingTeam;
+    }
+
+    public int getResult() {
+        return result;
+    }
+
+    public LocalDate getGameTime() {
+        return gameTime;
     }
 }
