@@ -23,7 +23,7 @@ public class MenuSystem {
        /*if(System.getProperty("os.name").contains("OS X")){
 
        }*/
-       //We wanna know where the players are saved, so that we can load them at the start of the program.
+       //We wanna know where the players are saved, so that we can load them at the start of the program.REMEMBER! MOVE TO UTIL, NO NEED FOR THIS CHECK HERE! 
        while(running) {
            try {
 
