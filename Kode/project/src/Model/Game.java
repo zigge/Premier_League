@@ -14,7 +14,7 @@ public class Game {
     private int result;
     private LocalDate gameTime;
 
-//    TODO: Verifiy this constructer
+//    TODO: Verify this constructor
     public Game(ArrayList<Player> player, String opposingTeam, int result, LocalDate gameTime) {
 //    TODO: Fill out constructor for game
         this.opposingTeam = opposingTeam;
@@ -23,7 +23,7 @@ public class Game {
         this.players = player;
 
     }
-//    TODO: Verifiy this constructer
+//    TODO: Verify this constructor
     public Game(String opposingTeam, LocalDate gameTime) {
         this.opposingTeam = opposingTeam;
         this.gameTime = gameTime;

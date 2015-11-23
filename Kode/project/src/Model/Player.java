@@ -63,8 +63,8 @@ public class Player {
         return position;
     }
 
-    //Before this methode is called, call a method that displays positions on field!!!
-    public void setPosition(int pos){ // Takes a int, witch is the position number fron the constructer: Positinon: int
+    //Before this method is called, call a method that displays positions on field!!!
+    public void setPosition(int pos){ // Takes an int, which is the position number from the constructor: Position: int
         if(pos < Util.fieldPosition.values().length || pos > 0){ // Gets the number of values of the enum: 4 in this case
             position = Util.fieldPosition.values()[pos].getPositionOnField();
         }else{
@@ -80,8 +80,8 @@ public class Player {
         this.salary = salary;
     }
 
-    public void setNationalaty(String nationalaty) {
-        nationalaty = nationalaty;
+    public void setNationality(String nationality) {
+        nationality = nationality;
     }
 
     public void setGame(int game) {
