@@ -27,26 +27,16 @@ public class MenuSystem {
                    playerMenu = scan.nextInt();
                    switch (playerMenu) {
                        case 1:
-<<<<<<< Updated upstream
-                           //TODO Some code for "new player" Who is writing this part ?
-                           break;
-                       case 2:
-                           //TODO Some code for "View player" Who is writing this part ?
-                           break;
-                       case 3:
-                           //TODO Some code for "Edit player" Who is writing this part ?
-                           break;
-                       case 4:
-                           break;
-=======
                            //TODO Some code for "new player" - Casper
+                           break;
                        case 2:
                            //TODO Some code for "View player" - Lucas
+                           break;
                        case 3:
                            //TODO Some code for "Edit player" - Henriette
+                           break;
                        case 4:
-                           //TODO Some code for "Quit" Lasse
->>>>>>> Stashed changes
+                           break;
                    }
 
                case 2:
@@ -74,7 +64,11 @@ public class MenuSystem {
 
 
                case 3:
-                   //TODO Some code for "Quit" Who is writing this part ?
+                   break;
+
+               case default:
+                   System.out.println("Please enter a valid number");
+                   break;
            }
        }
    }
