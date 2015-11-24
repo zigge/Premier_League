@@ -28,31 +28,37 @@ public class MenuSystem {
            headMenu = scan.nextInt();
            switch (headMenu) {
                case 1:
-                   System.out.println("Please select an option: \n 1: New Player \n 2: View players \n 3: Edit player \n 4: Quit ");
+                   System.out.println("Please select an option: \n1: New Player \n2: View players \n3: Edit player \n4: Quit ");
                    playerMenu = scan.nextInt();
                    switch (playerMenu) {
                        case 1:
                            //TODO Some code for "new player" Who is writing this part ?
+                           break;
                        case 2:
                            //TODO Some code for "View player" Who is writing this part ?
+                           break;
                        case 3:
                            //TODO Some code for "Edit player" Who is writing this part ?
+                           break;
                        case 4:
                            //TODO Some code for "Quit" Who is writing this part ?
+                           break;
                    }
 
                case 2:
-                   System.out.println("Please select an option: \n 1: Create Game \n 2: View Game from file \n 3: Quit");
+                   System.out.println("Please select an option: \n1: Manage Games \n2: View Game from file \n3: Quit");
                    gameMenu = scan.nextInt();
                    switch (gameMenu){
                        case 1:
-                                //TODO Vi skal lige gave en ''return''-button 
-                           System.out.println("Please select an option: \n 1: Upcomming game \n 2: Played game ");
+
+                           System.out.println("Please select an option: \n1: Upcomming game \n2: Played game \n3: Return  ");
                            switch (gameSubMenu){
                                case 1:
                                 //TODO Some code for pre game info
                                case 2:
                                 //TODO Some code for post game info
+
+                               case 3:
 
                            }
 
