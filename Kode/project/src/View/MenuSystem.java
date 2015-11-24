@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class MenuSystem {
     private static Scanner scan;
     private static int headMenu, playerMenu, gameMenu, gameSubMenu;
-    private static boolean folderCreated, running;
+    private static boolean running;
 
 
     //Menu run class

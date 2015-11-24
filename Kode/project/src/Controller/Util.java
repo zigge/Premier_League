@@ -12,9 +12,9 @@ import Model.Player;
  */
 public class Util {
     private static File playerFile;
-    private static File playerDIR = new File("Playerfile");
+    private static File playerDir = new File("Playerfile");
     private boolean folderCreated;
-    File savelocation;
+    private File savelocation;
 
         //TODO: Define if we determine the location of save games, or the user do!
     public void saveGame(Game game){
@@ -30,10 +30,10 @@ public class Util {
             playerFile = new File(System.getProperty("user.dir") + "\\Playerfile\\playerlist", "txt"); //Windows file system specific location C:\...\Playerfile
         }
 
-        if(!playerDIR.exists()){
+        if(!playerDir.exists()){
             try {
 
-                playerDIR.mkdir();
+                playerDir.mkdir();
                 folderCreated = true;
             } catch (SecurityException e) {
                 System.err.println("Cannot create folder");
@@ -54,11 +54,11 @@ public class Util {
 
     public ArrayList<Player> loadPlayers(File locationOfPlayers){
         //TODO Some code to load "players"
-        if(playerDIR.exists()){
+        if(playerDir.exists()){
             //Code for loading players from file
 
         }else{
-            System.out.println("Folder: " + playerDIR.getName() + "does not exists");
+            System.out.println("Folder: " + playerDir.getName() + "does not exists");
         }
 
         return null;
