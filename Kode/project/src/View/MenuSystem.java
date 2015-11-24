@@ -16,11 +16,6 @@ public class MenuSystem {
    public static void menu() {
        scan = new Scanner(System.in);
        running = true;
-       // Run a check for player file!!
-       //TODO Decide if this check is necessary.
-       /*if(System.getProperty("os.name").contains("OS X")){
-
-       }*/
        while(running) {
            //Menu print out
            System.out.println("Welcome! \nPlease select one of the menu point below:");
@@ -41,7 +36,6 @@ public class MenuSystem {
                            //TODO Some code for "Edit player" Who is writing this part ?
                            break;
                        case 4:
-                           //TODO Some code for "Quit" Who is writing this part ?
                            break;
                    }
 
