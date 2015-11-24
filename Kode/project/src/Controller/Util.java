@@ -11,6 +11,9 @@ import Model.Player;
  * TODO: Complete file
  */
 public class Util {
+    private static File playerFile = new File(System.getProperty("user.dir") + "/Players", "txt");
+    private static File playerDIR = new File("Players");
+    private boolean folderCreated;
     File savelocation;
 
         //TODO: Define if we determine the location of save games, or the user do!
@@ -30,6 +33,21 @@ public class Util {
 
     public ArrayList<Player> loadPlayers(File locationOfPlayers){
         //TODO Some code to load "players"
+        //We wanna know where the players are saved, so that we can load them at the start of the program.
+        if(!playerDIR.exists()){
+            try {
+
+                playerDIR.mkdir();
+                folderCreated = true;
+            } catch (SecurityException e) {
+                System.err.println("Cannot create folder");
+                folderCreated = false;
+            }
+
+        }else{
+
+        }
+
         return null;
     }
 

@@ -9,8 +9,6 @@ import java.util.Scanner;
 public class MenuSystem {
     private static Scanner scan;
     private static int headMenu, playerMenu, gameMenu, gameSubMenu;
-    private static File playerFile = new File(System.getProperty("user.dir") + "/Players", "txt");
-    private static File playerDIR = new File("Players");
     private static boolean folderCreated, running;
 
 
@@ -23,17 +21,7 @@ public class MenuSystem {
        /*if(System.getProperty("os.name").contains("OS X")){
 
        }*/
-       //We wanna know where the players are saved, so that we can load them at the start of the program.REMEMBER! MOVE TO UTIL, NO NEED FOR THIS CHECK HERE! 
        while(running) {
-           try {
-
-               playerDIR.mkdir();
-               folderCreated = true;
-           } catch (SecurityException e) {
-               System.err.println("Cannot create folder");
-               folderCreated = false;
-           }
-
            //Menu print out
            System.out.println("Welcome! \nPlease select one of the menu point below:");
            System.out.println("1: Games \n2: Players \n3: Quit ");
