@@ -27,6 +27,7 @@ public class MenuSystem {
                    playerMenu = scan.nextInt();
                    switch (playerMenu) {
                        case 1:
+<<<<<<< Updated upstream
                            //TODO Some code for "new player" Who is writing this part ?
                            break;
                        case 2:
@@ -37,6 +38,15 @@ public class MenuSystem {
                            break;
                        case 4:
                            break;
+=======
+                           //TODO Some code for "new player" - Casper
+                       case 2:
+                           //TODO Some code for "View player" - Lucas
+                       case 3:
+                           //TODO Some code for "Edit player" - Henriette
+                       case 4:
+                           //TODO Some code for "Quit" Lasse
+>>>>>>> Stashed changes
                    }
 
                case 2:
