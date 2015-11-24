@@ -11,8 +11,8 @@ import Model.Player;
  * TODO: Complete file
  */
 public class Util {
-    private static File playerFile = new File(System.getProperty("user.dir") + "/Players", "txt");
-    private static File playerDIR = new File("Players");
+    private static File playerFile;
+    private static File playerDIR = new File("Playerfile");
     private boolean folderCreated;
     File savelocation;
 
@@ -23,6 +23,27 @@ public class Util {
 
     public void savePlayer(ArrayList<Player> player){
         //TODO Some code to save "players"
+        //We wanna know where the players are saved, so that we can load them at the start of the program.
+        if(System.getProperty("os.name").contains("OS X")){
+            playerFile = new File(System.getProperty("user.dir") + "/Playerfile/playerlist", "txt"); // OSX/UNIX file system specific location /.../Playerfile
+        } else{
+            playerFile = new File(System.getProperty("user.dir") + "\\Playerfile\\playerlist", "txt"); //Windows file system specific location C:\...\Playerfile
+        }
+
+        if(!playerDIR.exists()){
+            try {
+
+                playerDIR.mkdir();
+                folderCreated = true;
+            } catch (SecurityException e) {
+                System.err.println("Cannot create folder");
+                folderCreated = false;
+            }
+            //Code for saving players to file.
+
+        }else{
+
+        }
     }
 
     public Game loadGame(File locationOfGame){
@@ -33,19 +54,11 @@ public class Util {
 
     public ArrayList<Player> loadPlayers(File locationOfPlayers){
         //TODO Some code to load "players"
-        //We wanna know where the players are saved, so that we can load them at the start of the program.
-        if(!playerDIR.exists()){
-            try {
-
-                playerDIR.mkdir();
-                folderCreated = true;
-            } catch (SecurityException e) {
-                System.err.println("Cannot create folder");
-                folderCreated = false;
-            }
+        if(playerDIR.exists()){
+            //Code for loading players from file
 
         }else{
-
+            System.out.println("Folder: " + playerDIR.getName() + "does not exists");
         }
 
         return null;

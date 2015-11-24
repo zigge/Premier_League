@@ -50,14 +50,12 @@ public class MenuSystem {
                    gameMenu = scan.nextInt();
                    switch (gameMenu){
                        case 1:
-
                            System.out.println("Please select an option: \n1: Upcomming game \n2: Played game \n3: Return  ");
                            switch (gameSubMenu){
                                case 1:
                                 //TODO Some code for pre game info
                                case 2:
                                 //TODO Some code for post game info
-
                                case 3:
 
                            }

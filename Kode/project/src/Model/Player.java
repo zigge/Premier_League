@@ -11,11 +11,11 @@ public class Player {
     private int salary;
     private String position;
     private String nationality;
-    private int game;
-    private int gamesWon;
-    private int gamesLoss;
+    private int game; //Number of games played
+    private int won;
+    private int lost;
     private int ties;
-    private String goal;
+    private String goal; //Consists of two ints
 
 
     public Player(String name, int salary, int position, String nationality){
@@ -43,11 +43,11 @@ public class Player {
     }
 
     public int getGamesWon() {
-        return gamesWon;
+        return won;
     }
 
     public int getGamesLoss() {
-        return gamesLoss;
+        return lost;
     }
 
     public int getTies() {
@@ -89,11 +89,11 @@ public class Player {
     }
 
     public void setGamesWon(int gamesWon) {
-        this.gamesWon = gamesWon;
+        this.won = gamesWon;
     }
 
     public void setGamesLoss(int gamesLoss) {
-        this.gamesLoss = gamesLoss;
+        this.lost = gamesLoss;
     }
 
     public void setTies(int ties) {
