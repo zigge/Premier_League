@@ -46,6 +46,7 @@ public class MenuSystem {
                    gameMenu = scan.nextInt();
                    switch (gameMenu){
                        case 1:
+                                //TODO Vi skal lige gave en ''return''-button 
                            System.out.println("Please select an option: \n 1: Upcomming game \n 2: Played game ");
                            switch (gameSubMenu){
                                case 1:
