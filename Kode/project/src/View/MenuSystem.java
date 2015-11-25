@@ -26,7 +26,7 @@ public class MenuSystem {
            headMenu = scan.nextInt();
            switch (headMenu) {
                case 1:
-                   System.out.println("Please select an option: \n1: New Player \n2: View players \n3: Edit player \n4: Quit ");
+                   System.out.println("Please select an option: \n1: New Player \n2: View players \n3: Edit player \n4: Delete Player \n5: Quit ");
                    playerMenu = scan.nextInt();
                    switch (playerMenu) {
                        case 1:
@@ -40,7 +40,10 @@ public class MenuSystem {
                            //TODO Some code for "Edit player" - Henriette
                            break;
                        case 4:
-
+                            //TODO Delete player - Lasse
+                           break;
+                       case 5:
+                            //TODO Quit
                            break;
                    }
 
