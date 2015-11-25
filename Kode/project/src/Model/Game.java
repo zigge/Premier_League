@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by lassebjorklund on 21/11/15.
  */
-public class Game {
+public class Game implements Serializable {
 
     private ArrayList<Player> players;
     private String opposingTeam;

@@ -1,5 +1,7 @@
 package View;
 
+import Controller.Util;
+
 import java.io.File;
 import java.util.Scanner;
 
@@ -19,6 +21,7 @@ public class MenuSystem {
        while(running) {
            //Menu print out
            System.out.println("Welcome! \nPlease select one of the menu point below:");
+           Util.checkPlayerFolder();
            System.out.println("1: Games \n2: Players \n3: Quit ");
            headMenu = scan.nextInt();
            switch (headMenu) {
@@ -49,7 +52,8 @@ public class MenuSystem {
                                case 1:
                                 //TODO Some code for pre game info
                                case 2:
-                                //TODO Some code for post game info
+                                //TODO Some code for post game info, REMEMBER the function "saveGame()" takes two parameters.
+                                //TODO A File, and a Game object. The file is the inputted location from a scanner.
                                case 3:
 
                            }
@@ -59,14 +63,11 @@ public class MenuSystem {
 
                        case 3:
                            //TODO Some code for quitting program
-
                    }
-
-
                case 3:
                    break;
 
-               case default:
+               default:
                    System.out.println("Please enter a valid number");
                    break;
            }

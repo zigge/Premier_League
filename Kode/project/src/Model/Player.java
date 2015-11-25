@@ -2,10 +2,12 @@ package Model;
 
 import Controller.Util;
 
+import java.io.Serializable;
+
 /**
  * Created by lassebjorklund on 20/11/15.
  */
-public class Player {
+public class Player implements Serializable {
 
     private String name;
     private int salary;
