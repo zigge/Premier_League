@@ -2,6 +2,7 @@ package View;
 
 import Controller.Util;
 
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -20,7 +21,7 @@ public class MenuSystem {
        while(running) {
            //Menu print out
            System.out.println("Welcome! \nPlease select one of the menu point below:");
-           Util.checkPlayerFolder();
+           Util.createPlayerFolder();
            System.out.println("1: Games \n2: Players \n3: Quit ");
            headMenu = scan.nextInt();
            switch (headMenu) {
@@ -38,6 +39,7 @@ public class MenuSystem {
                            //TODO Some code for "Edit player" - Henriette
                            break;
                        case 4:
+
                            break;
                    }
 
@@ -47,6 +49,7 @@ public class MenuSystem {
                    switch (gameMenu){
                        case 1:
                            System.out.println("Please select an option: \n1: Upcomming game \n2: Played game \n3: Return  ");
+                           gameSubMenu = scan.nextInt();
                            switch (gameSubMenu){
                                case 1:
                                 //TODO Some code for pre game info
@@ -54,9 +57,7 @@ public class MenuSystem {
                                 //TODO Some code for post game info, REMEMBER the function "saveGame()" takes two parameters.
                                 //TODO A File, and a Game object. The file is the inputted location from a scanner.
                                case 3:
-
                            }
-
                        case 2:
                            //TODO Some code for viewing game from file
 

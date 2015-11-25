@@ -14,6 +14,7 @@ public class Game implements Serializable {
     private String opposingTeam;
     private String result;
     private LocalDate gameTime;
+    private boolean gameCanceled;
 
 //    TODO: Verify this constructor
     public Game(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameTime) {
@@ -60,6 +61,14 @@ public class Game implements Serializable {
 
     public void setGameTime(LocalDate gameTime) {
         this.gameTime = gameTime;
+    }
+
+    public void setGameCanceled(boolean gameCanceled) {
+        this.gameCanceled = gameCanceled;
+    }
+
+    public boolean isGameCanceled() {
+        return gameCanceled;
     }
 }
 
