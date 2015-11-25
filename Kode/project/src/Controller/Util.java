@@ -11,7 +11,7 @@ import Model.Player;
  * TODO: Complete file
  */
 public class Util {
-    private static File playerFile;
+    private static File playerFile, file;
     private static File playerDir = new File("Playerfile");
     private static ObjectOutputStream objout = null;
     private static ObjectInputStream objin = null;
@@ -39,7 +39,7 @@ public class Util {
     public static void savePlayer(ArrayList<Player> player){
         //TODO Some code to save "players"
         //We wanna know where the players are saved, so that we can load them at the start of the program.
-
+        file = createPlayerFile();
     }
 
     public static Game loadGame(File locationOfGame){
@@ -65,19 +65,16 @@ public class Util {
         if(!playerDir.exists()){
             try {
                playerDir.mkdir();
-               createPlayerFile();
             } catch (SecurityException e) {
                 System.err.println("Cannot create folder");
             }
             //Code for saving players to file.
         }else{
-            createPlayerFile();
 
         }
     }
 
     public static File createPlayerFile(){
-
         if(System.getProperty("os.name").contains("OS X")){
             playerFile = new File(System.getProperty("user.dir") + "/Playerfile" + ".txt"); // OSX/UNIX file system specific location /.../Playerfile
             return playerFile;
