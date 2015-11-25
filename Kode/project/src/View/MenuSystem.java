@@ -31,6 +31,7 @@ public class MenuSystem {
                    switch (playerMenu) {
                        case 1:
                            //TODO Some code for "new player" - Casper
+                           //TODO Open issue: If two playes have the same name, what then?
                            break;
                        case 2:
                            //TODO Some code for "View player" - Lucas
