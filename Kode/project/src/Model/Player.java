@@ -3,7 +3,6 @@ package Model;
 import Controller.Util;
 
 import java.io.Serializable;
-import java.util.Scanner;
 
 /**
  * Created by lassebjorklund on 20/11/15.
