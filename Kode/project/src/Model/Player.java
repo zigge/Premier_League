@@ -3,6 +3,7 @@ package Model;
 import Controller.Util;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 /**
  * Created by lassebjorklund on 20/11/15.
@@ -20,7 +21,7 @@ public class Player implements Serializable {
     private String goal; //Consists of two ints
 
 
-    public Player(String name, int salary, int position, String nationality){
+    public Player(String name, int salary, int position, String nationality) {
 
         this.name = name;
         this.salary = salary;
@@ -66,12 +67,8 @@ public class Player implements Serializable {
     }
 
     //Before this method is called, call a method that displays positions on field!!!
-    public void setPosition(int pos){ // Takes an int, which is the position number from the constructor: Position: int
-        if(pos < Util.fieldPosition.values().length || pos > 0){ // Gets the number of values of the enum: 4 in this case
+    public void setPosition(int pos){// Takes an int, which is the position number from the constructor: Position: int
             position = Util.fieldPosition.values()[pos].getPositionOnField();
-        }else{
-            System.out.println("The position does not exists");
-        }
     }
 
     public void setName(String name) {

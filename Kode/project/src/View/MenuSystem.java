@@ -1,8 +1,11 @@
 package View;
 
 import Controller.Util;
+import Model.Player;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -10,19 +13,29 @@ import java.util.Scanner;
  */
 public class MenuSystem {
     private static Scanner scan;
-    private static int headMenu, playerMenu, gameMenu, gameSubMenu;
+    private static int headMenu, playerMenu, gameMenu, gameSubMenu, playerToDelete, count;
+    private static String confDeletePlayer;
+    private static ArrayList<Player> playerList;
     private static boolean running;
+
 
 
     //Menu run class
    public static void menu() {
+       Player player1 = new Player("Test", 2000, 2, "Cuba");
+       Player player2 = new Player("Test2", 20003, 3, "Cuba");
+       playerList = new ArrayList<>();
+       playerList.add(player1);
+       playerList.add(player2);
        scan = new Scanner(System.in);
        running = true;
+
        while(running) {
            //Menu print out
            System.out.println("Welcome! \nPlease select one of the menu point below:");
            Util.createPlayerFolder();
-           System.out.println("1: Games \n2: Players \n3: Quit ");
+           System.out.println("1: Players \n2: Games \n3: Quit ");
+           System.out.println(headMenu);
            headMenu = scan.nextInt();
            switch (headMenu) {
                case 1:
@@ -32,6 +45,8 @@ public class MenuSystem {
                        case 1:
                            //TODO Some code for "new player" - Casper
                            //TODO Open issue: If two playes have the same name, what then?
+                           // Casper, you need to make this check: if (pos > Util.fieldPosition.values().length || pos < 0), if the number is < 4 run else statement. This i when you set the position
+
                            break;
                        case 2:
                            //TODO Some code for "View player" - Lucas
@@ -41,6 +56,40 @@ public class MenuSystem {
                            break;
                        case 4:
                             //TODO Delete player - Lasse
+                           do {
+                               try {
+                                   count = 1;
+                                   if (playerList.size() != 0) {
+                                       System.out.println(" player do you want to delete ?");
+                                       for (Player t : playerList) {
+                                           System.out.printf(count + ": Name: %s Nationality: %s Position on field: %s Games won: %d \n", t.getName(), t.getNationalaty(), t.getPosition(), t.getGamesWon());
+                                           count++;
+                                       }
+                                       playerToDelete = scan.nextInt();
+                                       System.out.println(playerToDelete);
+                                       System.out.println("Are you sure you want to delete: " + playerList.get(playerToDelete-1).getName()); // The negative one, is to get the index of player fro the for loop to mach.
+                                       confDeletePlayer = scan.next();
+                                       switch (confDeletePlayer.toLowerCase()) {
+                                           case "yes":
+                                               playerList.remove(playerToDelete);
+                                               break;
+                                           case "no":
+                                               break;
+                                           default:
+                                               System.out.println("Please enter yes/no");
+                                               break;
+                                       }
+                                   } else {
+                                       System.out.println("No players to delete");
+                                       break;
+                                   }
+                               }catch (InputMismatchException | IndexOutOfBoundsException e) {
+                                   System.out.println("Please enter a number");
+                                   playerToDelete = 0;
+                                   scan.nextLine();
+                               }
+                           }while(playerToDelete <= 0);
+
                            break;
                        case 5:
                             //TODO Quit
@@ -52,7 +101,7 @@ public class MenuSystem {
                    gameMenu = scan.nextInt();
                    switch (gameMenu){
                        case 1:
-                           System.out.println("Please select an option: \n1: Upcomming game \n2: Played game \n3: Return  ");
+                           System.out.println("Please select an option: \n1: Upcomming game \n2: Played game \n3: Cancle Upcomming Game \n4: Quit  ");
                            gameSubMenu = scan.nextInt();
                            switch (gameSubMenu){
                                case 1:
@@ -61,6 +110,8 @@ public class MenuSystem {
                                 //TODO Some code for post game info, REMEMBER the function "saveGame()" takes two parameters.
                                 //TODO A File, and a Game object. The file is the inputted location from a scanner.
                                case 3:
+                               //TODO Edit game code. This is only for the variable gameCanceled in game, no delition or edit of other att in a game.
+                               case 4:
                            }
                        case 2:
                            //TODO Some code for viewing game from file
