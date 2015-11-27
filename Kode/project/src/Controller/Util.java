@@ -189,6 +189,14 @@ public class Util {
         }
     }
 
+    public static ArrayList<Player>deletePlayer(String name){
+        return null;
+    }
+
+    public static Player getPlayers(int id ){
+
+    }
+
     public enum fieldPosition {
         FORWARD("Forward position"),
         DEFENDER("Defending position"),

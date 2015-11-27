@@ -17,16 +17,20 @@ public class MenuSystem {
     private static String confDeletePlayer;
     private static ArrayList<Player> playerList;
     private static boolean running;
+    private final static String esc = "\u001b[2J";
+    private final static String home = "\u001b[H";
 
 
 
     //Menu run class
    public static void menu() {
-       Player player1 = new Player("Test", 2000, 2, "Cuba");
-       Player player2 = new Player("Test2", 20003, 3, "Cuba");
+
+       Player player1 = new Player("Test", 2000, 2, "Cuba"); //Test players!
+       Player player2 = new Player("Test2", 20003, 3, "Cuba");// Test players!
        playerList = new ArrayList<>();
        playerList.add(player1);
        playerList.add(player2);
+
        scan = new Scanner(System.in);
        running = true;
 
@@ -56,39 +60,8 @@ public class MenuSystem {
                            break;
                        case 4:
                             //TODO Delete player - Lasse
-                           do {
-                               try {
-                                   count = 1;
-                                   if (playerList.size() != 0) {
-                                       System.out.println(" player do you want to delete ?");
-                                       for (Player t : playerList) {
-                                           System.out.printf(count + ": Name: %s Nationality: %s Position on field: %s Games won: %d \n", t.getName(), t.getNationalaty(), t.getPosition(), t.getGamesWon());
-                                           count++;
-                                       }
-                                       playerToDelete = scan.nextInt();
-                                       System.out.println(playerToDelete);
-                                       System.out.println("Are you sure you want to delete: " + playerList.get(playerToDelete-1).getName()); // The negative one, is to get the index of player fro the for loop to mach.
-                                       confDeletePlayer = scan.next();
-                                       switch (confDeletePlayer.toLowerCase()) {
-                                           case "yes":
-                                               playerList.remove(playerToDelete);
-                                               break;
-                                           case "no":
-                                               break;
-                                           default:
-                                               System.out.println("Please enter yes/no");
-                                               break;
-                                       }
-                                   } else {
-                                       System.out.println("No players to delete");
-                                       break;
-                                   }
-                               }catch (InputMismatchException | IndexOutOfBoundsException e) {
-                                   System.out.println("Please enter a number");
-                                   playerToDelete = 0;
-                                   scan.nextLine();
-                               }
-                           }while(playerToDelete <= 0);
+                           System.out.println(esc + home);
+
 
                            break;
                        case 5:
@@ -101,7 +74,7 @@ public class MenuSystem {
                    gameMenu = scan.nextInt();
                    switch (gameMenu){
                        case 1:
-                           System.out.println("Please select an option: \n1: Upcomming game \n2: Played game \n3: Cancle Upcomming Game \n4: Quit  ");
+                           System.out.println("Please select an option: \n1: Upcomming game \n2: Create Played game \n3: Cancle Upcomming Game \n4: Quit  ");
                            gameSubMenu = scan.nextInt();
                            switch (gameSubMenu){
                                case 1:
@@ -109,6 +82,7 @@ public class MenuSystem {
                                case 2:
                                 //TODO Some code for post game info, REMEMBER the function "saveGame()" takes two parameters.
                                 //TODO A File, and a Game object. The file is the inputted location from a scanner.
+
                                case 3:
                                //TODO Edit game code. This is only for the variable gameCanceled in game, no delition or edit of other att in a game.
                                case 4:

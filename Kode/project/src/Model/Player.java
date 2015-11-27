@@ -17,10 +17,11 @@ public class Player implements Serializable {
     private int won;
     private int lost;
     private int ties;
+    private int playerNumber;
     private String goal; //Consists of two ints
 
 
-    public Player(String name, int salary, int position, String nationality) {
+    public Player(String name, int salary, int position, String nationality, int playerNumber) {
 
         this.name = name;
         this.salary = salary;
@@ -65,6 +66,10 @@ public class Player implements Serializable {
         return position;
     }
 
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
     //Before this method is called, call a method that displays positions on field!!!
     public void setPosition(int pos){// Takes an int, which is the position number from the constructor: Position: int
             position = Util.fieldPosition.values()[pos].getPositionOnField();
@@ -101,4 +106,5 @@ public class Player implements Serializable {
     public void setGoal(String goal) {
         this.goal = goal;
     }
+
 }
