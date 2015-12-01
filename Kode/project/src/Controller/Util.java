@@ -15,12 +15,10 @@ import Model.Player;
  * TODO: Complete file
  */
 public class Util {
-    private static File playerFile = null;
-    private static File file = null;
+    private static File playerFile, file;
     private static File playerDir = new File("PlayerFile");
     private static File playedGameDir = new File("PlayedGames");
     private static File upcommingGames = new File("UpcommingGames");
-    private static ObjectOutputStream objout = null;
     private static ObjectInputStream objin = null;
     private static ArrayList<Player> tempPlayerList, mergeList;
     private static Game returnGame;
@@ -33,12 +31,12 @@ public class Util {
     }
 
     public static void saveGame(Game game, String fileName) {
+        ObjectOutputStream objout = null;
         if (game != null) {
             if (game.getResult() == null) {
                 try {
                     objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/PlayedGames" + fileName + " - playedGame.txt")));
                     objout.writeObject(game);
-
                 } catch (IOException e) {
                     e.getCause();
                     e.getMessage();
@@ -80,23 +78,21 @@ public class Util {
     }
 
     public static void savePlayers(ArrayList<Player> players) {
-        if (players.size() != 0) {
-            try {
+    ObjectOutputStream objout = null;
+        try {
                 objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(playerFile))); //File to write to
                 objout.writeObject(players); //Writes to file
             } catch (IOException e) {
                 e.printStackTrace();
-
             } finally {
                 try {
-                    objout.close();
+                    if(objout != null) {
+                        objout.close();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-        } else {
-            System.out.printf("No players in list");
-        }
     }
 
     public static void viewPlayers() {
@@ -108,6 +104,7 @@ public class Util {
     }
 
     public static Game loadGame(File locationOfGame) {
+    ObjectInputStream objin = null;
         //TODO Some code to load "Game"
         if (locationOfGame.exists()) {
             try {
@@ -138,6 +135,7 @@ public class Util {
     }
 
     public static ArrayList<Player> loadPlayers() {
+        ObjectInputStream objin = null;
         ArrayList<Player> returnPlayers = null;
         try {
             if (playerFile.length() != 0) {
