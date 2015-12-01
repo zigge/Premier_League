@@ -20,7 +20,6 @@ public class Player implements Serializable {
     private int playerNumber;
     private String goal; //Consists of two ints
 
-
     public Player(String name, int salary, int position, String nationality, int playerNumber) {
 
         this.name = name;
@@ -30,34 +29,42 @@ public class Player implements Serializable {
     }
 
     public String getName() {
+
         return name;
     }
 
     public int getSalary() {
+
         return salary;
     }
 
     public String getNationalaty() {
+
         return nationality;
     }
 
     public int getGame() {
+
         return game;
     }
 
     public int getGamesWon() {
+
         return won;
     }
 
     public int getGamesLoss() {
+
         return lost;
     }
 
     public int getTies() {
+
         return ties;
     }
 
     public String getGoal() {
+
         return goal;
     }
 
@@ -67,44 +74,68 @@ public class Player implements Serializable {
     }
 
     public int getPlayerNumber() {
+
         return playerNumber;
+
     }
 
     //Before this method is called, call a method that displays positions on field!!!
     public void setPosition(int pos){// Takes an int, which is the position number from the constructor: Position: int
+
             position = Util.fieldPosition.values()[pos].getPositionOnField();
+
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 
     public void setSalary(int salary) {
+
         this.salary = salary;
     }
 
     public void setNationality(String nationality) {
+
         nationality = nationality;
     }
 
     public void setGame(int game) {
+
         this.game = game;
     }
 
     public void setGamesWon(int gamesWon) {
+
         this.won = gamesWon;
     }
 
     public void setGamesLoss(int gamesLoss) {
+
         this.lost = gamesLoss;
     }
 
     public void setTies(int ties) {
+
         this.ties = ties;
     }
 
     public void setGoal(String goal) {
+
         this.goal = goal;
+    }
+
+    public void setPlayerNumber(int number){
+
+        playerNumber = number;
+    }
+
+
+    @Override
+    public String toString(){
+        return "Name: " + getName() + " Nationalaty: " + getNationalaty() + " Salary: " + getSalary() + " Games: " + getGame() +
+                " Position: " + getPosition() + " Won: " + getGamesWon() + " Losses: " + getGamesLoss() + " Ties: " + getTies();
     }
 
 }

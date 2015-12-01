@@ -25,11 +25,11 @@ public class MenuSystem {
     //Menu run class
    public static void menu() {
 
-       Player player1 = new Player("Test", 2000, 2, "Cuba"); //Test players!
+       /*Player player1 = new Player("Test", 2000, 2, "Cuba"); //Test players!
        Player player2 = new Player("Test2", 20003, 3, "Cuba");// Test players!
        playerList = new ArrayList<>();
        playerList.add(player1);
-       playerList.add(player2);
+       playerList.add(player2);*/
 
        scan = new Scanner(System.in);
        running = true;
@@ -78,7 +78,7 @@ public class MenuSystem {
                            gameSubMenu = scan.nextInt();
                            switch (gameSubMenu){
                                case 1:
-                                //TODO Some code for pre game info
+
                                case 2:
                                 //TODO Some code for post game info, REMEMBER the function "saveGame()" takes two parameters.
                                 //TODO A File, and a Game object. The file is the inputted location from a scanner.

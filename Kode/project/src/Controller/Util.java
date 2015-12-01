@@ -14,32 +14,56 @@ import Model.Player;
 public class Util {
     private static File playerFile, file;
     private static File playerDir = new File("PlayerFile");
+    private static File playedGameDir = new File("PlayedGames");
+    private static File upcommingGames = new File("UpcommingGames");
     private static ObjectOutputStream objout = null;
     private static ObjectInputStream objin = null;
     private static Game returnGame;
 
-    public static void saveGame(Game game, File saveLocation) {
+    public static void saveGame(Game game, String fileName) {
         if (game != null) {
-            try {
-                objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(saveLocation)));
-                objout.writeObject(game);
-
-            } catch (IOException e) {
-                e.getCause();
-                e.getMessage();
-                e.printStackTrace();
-
-            } finally {
+            if (game.getResult() == null) {
                 try {
-                    objout.close();
+                    objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/PlayedGames" + fileName + " - playedGame.txt")));
+                    objout.writeObject(game);
+
                 } catch (IOException e) {
                     e.getCause();
                     e.getMessage();
                     e.printStackTrace();
+
+                } finally {
+                    try {
+                        objout.close();
+                    } catch (IOException e) {
+                        e.getCause();
+                        e.getMessage();
+                        e.printStackTrace();
+                    }
+                }
+            }else{
+                try {
+                    objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "UpcommingGames" + fileName + " - upcommingGame.txt")));
+                    objout.writeObject(game);
+
+                } catch (IOException e) {
+                    e.getCause();
+                    e.getMessage();
+                    e.printStackTrace();
+
+                } finally {
+                    try {
+                        objout.close();
+                    } catch (IOException e) {
+                        e.getCause();
+                        e.getMessage();
+                        e.printStackTrace();
+                    }
                 }
             }
+
         } else {
-            System.out.println("Game is null " + game + "we can not save a null game to: " + saveLocation);
+            System.out.println("Game is null, cannot create!");
         }
     }
 
@@ -110,26 +134,19 @@ public class Util {
                 returnPlayer = (ArrayList<Player>) objin.readObject();
 
             } catch (FileNotFoundException e) {
-                e.getCause();
-                e.getMessage();
                 e.printStackTrace();
 
             } catch (IOException e) {
-                e.getCause();
-                e.getMessage();
                 e.printStackTrace();
 
-            }catch (ClassNotFoundException e){
-                e.getCause();
-                e.getMessage();
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
 
             } finally {
                 try {
                     objin.close();
                 } catch (IOException e) {
-                    e.getCause();
-                    e.getMessage();
+
                     e.printStackTrace();
                 }
             }
@@ -151,7 +168,7 @@ public class Util {
                 e.getMessage();
                 e.printStackTrace();
 
-            }catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException e) {
                 e.getCause();
                 e.getMessage();
                 e.printStackTrace();
@@ -189,11 +206,57 @@ public class Util {
         }
     }
 
-    public static ArrayList<Player>deletePlayer(String name){
-        return null;
+    public static void createPlayedGamesFolder() {
+
+        try {
+            playedGameDir.mkdir();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static Player getPlayers(int id ){
+    public static void createUpcommingGameFolder() {
+
+        try {
+            upcommingGames.mkdir();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String deletePlayer(int number) {
+
+        String returnStatement = "";
+        ArrayList<Player> tempPlayerArrayList = new ArrayList<>(loadPlayers());
+        for(Player p: tempPlayerArrayList){
+            if(p.getPlayerNumber() == number){
+                int index = tempPlayerArrayList.indexOf(p);
+                tempPlayerArrayList.remove(index);
+                returnStatement =  "Player: " + p + " deleted!";
+            }else{
+                returnStatement =  "Could not find player";
+            }
+        }
+
+        return returnStatement;
+    }
+
+    public static Player getPlayer(int id) {
+        Player player = null;
+        ArrayList<Player> tempPlayerList = new ArrayList<>(loadPlayers());
+        for(Player p: tempPlayerList){
+            if(p.getPlayerNumber() == id){
+             player = p;
+            }
+        }
+        return player;
+    }
+
+    public static void updatePlayer(Player player) {
+
+    }
+
+    public static void createGame(){
 
     }
 

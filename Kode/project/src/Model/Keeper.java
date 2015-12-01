@@ -8,8 +8,8 @@ public class Keeper extends Player {
     private int saves;
 
 
-    public Keeper(String name, int salary, int position, String nationality, int saves) {
-        super(name, salary, position, nationality);
+    public Keeper(String name, int salary, int position, String nationality, int playerNumber, int saves) {
+        super(name, salary, position, nationality, playerNumber);
         this.saves = saves;
     }
 
