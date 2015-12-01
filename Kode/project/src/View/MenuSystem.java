@@ -31,6 +31,8 @@ public class MenuSystem {
        playerList.add(player1);
        playerList.add(player2);
 
+       System.out.println(System.getProperty("user.dir"));
+       Util.createPlayerFolder();
        Util.createPlayerFile();
        Util.savePlayers(playerList);
 
