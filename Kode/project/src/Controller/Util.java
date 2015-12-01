@@ -11,7 +11,6 @@ import Model.Player;
  * Created by lassebjorklund on 20/11/15.
  * TODO: Complete file
  */
-
 public class Util {
     private static File playerFile, file;
     private static File playerDir = new File("PlayerFile");
@@ -21,6 +20,17 @@ public class Util {
     private static ObjectInputStream objin = null;
     private static Game returnGame;
     private static int playerIndex;
+
+    public static void createPlayer(String name, int salary, int position, String nationality, int playerNumber){
+        ArrayList<Player> tempPlayerList = new ArrayList<>(loadPlayers());
+        Player player = new Player(name, salary, position, nationality, playerNumber);
+        if(!tempPlayerList.contains(player)){
+          updatePlayer(player);
+        }else{
+            System.out.println("Player all ready exists in file!");
+        }
+
+    }
 
     public static void saveGame(Game game, String fileName) {
         if (game != null) {
@@ -94,7 +104,6 @@ public class Util {
         } else {
             System.out.printf("No players in list");
         }
-
     }
 
     public static Game loadGame(File locationOfGame) {
@@ -262,12 +271,10 @@ public class Util {
         return player;
     }
 
-    public static ArrayList<Player> updatePlayer(Player player) {
+    public static void updatePlayer(Player player) {
         ArrayList<Player> tempArraylist = new ArrayList<>(loadPlayers());
         tempArraylist.set(playerIndex, player);
         savePlayers(tempArraylist);
-        return tempArraylist;
-
     }
 
     public static void createGameUpcommingGame(String opposingTeam, LocalDate gameTime, String nameOfFile) {

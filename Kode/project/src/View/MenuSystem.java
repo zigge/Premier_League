@@ -53,10 +53,11 @@ public class MenuSystem {
                            //TODO Some code for "new player" - Casper
                            //TODO Open issue: If two playes have the same name, what then?
                            // Casper, you need to make this check: if (pos > Util.fieldPosition.values().length || pos < 0), if the number is < 4 run else statement. This i when you set the position
-
+                           // Casper, use the methode from Util.createPlayer, to create player. Your task is to make checks and switches for entering data intro the method
                            break;
                        case 2:
                            //TODO Some code for "View player" - Lucas
+                           //Your task is to display the current players form the file "Playerfile" using the methode in util, loadPlayers.
                            break;
                        case 3:
                            //TODO Some code for "Edit player" - Henriette
