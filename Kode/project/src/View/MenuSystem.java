@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class MenuSystem {
     private static Scanner scan;
-    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, playerToDelete, count;
+    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, playerToDelete, count, playerNumber ;
     private static String confDeletePlayer;
     private static ArrayList<Player> playerList;
     private static boolean running;
@@ -32,11 +32,6 @@ public class MenuSystem {
        playerList.add(player1);
        playerList.add(player2);
 
-<<<<<<< Updated upstream
-       System.out.println(System.getProperty("user.dir"));
-=======
-
->>>>>>> Stashed changes
        Util.createPlayerFolder();
        Util.createPlayerFile();
        Util.savePlayers(playerList);
@@ -75,7 +70,11 @@ public class MenuSystem {
 
                            System.out.println("Which player do you want to edit?");
                            System.out.println("Player number:");
+<<<<<<< Updated upstream
                            int playerNumberEdit = scan.nextInt();
+=======
+                           playerNumber = scan.nextInt();
+>>>>>>> Stashed changes
 
                            System.out.println("What do you want to edit");
                            System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Games won \n7: Games lost \n8: Tied games \n9: Goals \10: Quit");
@@ -113,7 +112,7 @@ public class MenuSystem {
                            }
                            System.out.println("Who do you want to remove ? ");
                            System.out.println("Player number: ");
-                           int playerNumber = scan.nextInt();
+                           playerNumber = scan.nextInt();
                            String conf = Util.deletePlayer(playerNumber);
                            System.out.println(conf);
 
