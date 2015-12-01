@@ -25,15 +25,15 @@ public class MenuSystem {
     //Menu run class
     public static void menu() {
 
-        /*Player player1 = new Player("Test", 2000, 2, "Cuba", 6); //Test players!
+        Player player1 = new Player("Test", 2000, 2, "Cuba", 6); //Test players!
         Player player2 = new Player("Test2", 20003, 3, "Cuba", 9);// Test players!
         playerList = new ArrayList<>();
         playerList.add(player1);
-        playerList.add(player2);*/
+        playerList.add(player2);
 
+        Util.savePlayers(playerList);
         Util.createPlayerFolder();
         Util.createPlayerFile();
-
         scan = new Scanner(System.in);
         running = true;
 

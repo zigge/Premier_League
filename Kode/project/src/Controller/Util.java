@@ -22,18 +22,14 @@ public class Util {
     private static File upcommingGames = new File("UpcommingGames");
     private static ObjectOutputStream objout = null;
     private static ObjectInputStream objin = null;
+    private static ArrayList<Player> tempPlayerList, mergeList;
     private static Game returnGame;
     private static int playerIndex;
 
     public static void createPlayer(String name, int salary, int position, String nationality, int playerNumber) {
-        ArrayList<Player> tempPlayerList = new ArrayList<>(loadPlayers());
+        tempPlayerList = new ArrayList<>();
         Player player = new Player(name, salary, position, nationality, playerNumber);
-        if (!tempPlayerList.contains(player)) {
-            updatePlayer(player);
-        } else {
-            System.out.println("Player all ready exists in file!");
-        }
-
+        tempPlayerList.add(player);
     }
 
     public static void saveGame(Game game, String fileName) {
@@ -83,12 +79,11 @@ public class Util {
         }
     }
 
-    public static void savePlayers(ArrayList<Player> player) {
-        //We wanna know where the players are saved, so that we can load them at the start of the program.
-        if (player.size() != 0) {
+    public static void savePlayers(ArrayList<Player> players) {
+        if (players.size() != 0) {
             try {
                 objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(playerFile))); //File to write to
-                objout.writeObject(player); //Writes to file
+                objout.writeObject(players); //Writes to file
             } catch (IOException e) {
                 e.printStackTrace();
 
@@ -104,10 +99,10 @@ public class Util {
         }
     }
 
-    public static void viewPlayers(){
+    public static void viewPlayers() {
 
         ArrayList<Player> tempArray = new ArrayList<>(loadPlayers());
-        for(Player p : tempArray ){
+        for (Player p : tempArray) {
             System.out.println(p);
         }
     }
@@ -143,67 +138,34 @@ public class Util {
     }
 
     public static ArrayList<Player> loadPlayers() {
-        //TODO Some code to load "players"
-        ArrayList<Player> returnPlayer = null;
-        if (playerDir.exists()) {
-            try {
+        ArrayList<Player> returnPlayers = null;
+        try {
+            if (playerFile.length() != 0) {
                 objin = new ObjectInputStream(new BufferedInputStream(new FileInputStream(playerFile)));
-                returnPlayer = (ArrayList<Player>) objin.readObject();
+                returnPlayers = (ArrayList<Player>) objin.readObject();
+            } else {
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            }
 
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (objin != null) {
+                    objin.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
-
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-
-            } catch (NullPointerException e) {
-                System.out.println("The playerFile is empty! Add players from \"Create Player\" ");
-
-            } finally {
-                try {
-                    objin.close();
-                } catch (IOException e) {
-
-                    e.printStackTrace();
-                }
             }
-            return returnPlayer;
 
-        } else {
-            createPlayerFolder();
-            try {
-                objin = new ObjectInputStream(new BufferedInputStream(new FileInputStream(playerFile)));
-                returnPlayer = (ArrayList<Player>) objin.readObject();
-
-            } catch (FileNotFoundException e) {
-                e.getCause();
-                e.getMessage();
-                e.printStackTrace();
-
-            } catch (IOException e) {
-                e.getCause();
-                e.getMessage();
-                e.printStackTrace();
-
-            } catch (ClassNotFoundException e) {
-                e.getCause();
-                e.getMessage();
-                e.printStackTrace();
-
-            } finally {
-                try {
-                    objin.close();
-                } catch (IOException e) {
-                    e.getCause();
-                    e.getMessage();
-                    e.printStackTrace();
-                }
-            }
-            return returnPlayer;
         }
+        return returnPlayers;
     }
 
     public static void createPlayerFolder() {
@@ -220,9 +182,15 @@ public class Util {
     }
 
     public static File createPlayerFile() {
+        try {
             playerFile = new File(System.getProperty("user.dir") + "/Playerfile/playerFile" + ".txt"); // OSX/UNIX file system specific location /.../Playerfile
+            playerFile.createNewFile();
             return playerFile;
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            return playerFile;
+        }
     }
 
     public static void createPlayedGamesFolder() {
@@ -278,8 +246,14 @@ public class Util {
 
     public static void updatePlayer(Player player) {
         ArrayList<Player> tempArraylist = new ArrayList<>(loadPlayers());
-        tempArraylist.set(playerIndex, player);
-        savePlayers(tempArraylist);
+        if(tempArraylist.size()!=0){
+            tempArraylist.set(playerIndex, player);
+            tempArraylist.addAll(tempPlayerList);
+            savePlayers(tempArraylist);
+        }else{
+            savePlayers(tempPlayerList);
+        }
+
     }
 
     public static void createGameUpcommingGame(String opposingTeam, LocalDate gameTime, String nameOfFile) {
