@@ -4,6 +4,7 @@ import Controller.Util;
 import Model.Player;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -31,7 +32,11 @@ public class MenuSystem {
        playerList.add(player1);
        playerList.add(player2);
 
+<<<<<<< Updated upstream
        System.out.println(System.getProperty("user.dir"));
+=======
+
+>>>>>>> Stashed changes
        Util.createPlayerFolder();
        Util.createPlayerFile();
        Util.savePlayers(playerList);
@@ -42,9 +47,7 @@ public class MenuSystem {
        while(running) {
            //Menu print out
            System.out.println("Welcome! \nPlease select one of the menu point below:");
-           Util.createPlayerFolder();
            System.out.println("1: Players \n2: Games \n3: Quit ");
-           System.out.println(headMenu);
            headMenu = scan.nextInt();
            switch (headMenu) {
                case 1:
@@ -58,10 +61,8 @@ public class MenuSystem {
                            // Casper, use the methode from Util.createPlayer, to create player. Your task is to make checks and switches for entering data intro the method
                            break;
                        case 2:
-                           //TODO Some code for "View player" - Lucas
-                           //Your task is to display the current players form the file "Playerfile" using the methode in util, loadPlayers.
-                           ArrayList<Player> showplayers = new ArrayList<>(Util.loadPlayers());
-                           for(Player p: showplayers) {
+                           ArrayList<Player> showPlayers = new ArrayList<>(Util.loadPlayers());
+                           for(Player p: showPlayers) {
                                System.out.println(p);
                            }
                            break;

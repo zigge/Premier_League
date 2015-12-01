@@ -1,6 +1,9 @@
 package Controller;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,7 +15,8 @@ import Model.Player;
  * TODO: Complete file
  */
 public class Util {
-    private static File playerFile, file;
+    private static File playerFile = null;
+    private static File file = null;
     private static File playerDir = new File("PlayerFile");
     private static File playedGameDir = new File("PlayedGames");
     private static File upcommingGames = new File("UpcommingGames");
@@ -21,12 +25,12 @@ public class Util {
     private static Game returnGame;
     private static int playerIndex;
 
-    public static void createPlayer(String name, int salary, int position, String nationality, int playerNumber){
+    public static void createPlayer(String name, int salary, int position, String nationality, int playerNumber) {
         ArrayList<Player> tempPlayerList = new ArrayList<>(loadPlayers());
         Player player = new Player(name, salary, position, nationality, playerNumber);
-        if(!tempPlayerList.contains(player)){
-          updatePlayer(player);
-        }else{
+        if (!tempPlayerList.contains(player)) {
+            updatePlayer(player);
+        } else {
             System.out.println("Player all ready exists in file!");
         }
 
@@ -53,7 +57,7 @@ public class Util {
                         e.printStackTrace();
                     }
                 }
-            }else{
+            } else {
                 try {
                     objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "UpcommingGames" + fileName + " - upcommingGame.txt")));
                     objout.writeObject(game);
@@ -81,11 +85,9 @@ public class Util {
 
     public static void savePlayers(ArrayList<Player> player) {
         //We wanna know where the players are saved, so that we can load them at the start of the program.
-        file = createPlayerFile();
-        System.out.println(file);
         if (player.size() != 0) {
             try {
-                objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file))); //File to write to
+                objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(playerFile))); //File to write to
                 objout.writeObject(player); //Writes to file
             } catch (IOException e) {
                 e.getCause();
@@ -157,7 +159,7 @@ public class Util {
             } catch (NullPointerException e) {
                 e.printStackTrace();
 
-            }finally {
+            } finally {
                 try {
                     objin.close();
                 } catch (IOException e) {
@@ -202,23 +204,22 @@ public class Util {
     }
 
     public static void createPlayerFolder() {
+        if (!playerDir.exists()) {
+            try {
+                playerDir.mkdir();
+            } catch (SecurityException e) {
+                System.err.println("Cannot create folder");
+            }
+            //Code for saving players to file.
+        } else {
 
-        try {
-            playerDir.mkdir();
-        } catch (SecurityException e) {
-            System.err.println("Cannot create folder");
         }
-        //Code for saving players to file.
     }
 
     public static File createPlayerFile() {
-        if (System.getProperty("os.name").contains("OS X")) {
             playerFile = new File(System.getProperty("user.dir") + "/Playerfile/playerFile" + ".txt"); // OSX/UNIX file system specific location /.../Playerfile
             return playerFile;
-        } else {
-            playerFile = new File(System.getProperty("user.dir") + "\\Playerfile\\playerlist" + ".txt"); //Windows file system specific location C:\...\Playerfile
-            return playerFile;
-        }
+
     }
 
     public static void createPlayedGamesFolder() {
@@ -240,19 +241,20 @@ public class Util {
     }
 
     public static String deletePlayer(int number) {
+
         String returnStatement = "";
         ArrayList<Player> tempPlayerArrayList = new ArrayList<>(loadPlayers());
-        for(Player p: tempPlayerArrayList){
-            if(p.getPlayerNumber() == number){
+        for (Player p : tempPlayerArrayList) {
+            if (p.getPlayerNumber() == number) {
                 int index = tempPlayerArrayList.indexOf(p);
                 tempPlayerArrayList.remove(index);
-                for(Player d: tempPlayerArrayList){
+                for (Player d : tempPlayerArrayList) {
                     System.out.println(d);
                 }
                 savePlayers(tempPlayerArrayList);
-                returnStatement =  "Player: " + p + " deleted!";
-            }else{
-                returnStatement =  "Could not find player";
+                returnStatement = "Player: " + p + " deleted!";
+            } else {
+                returnStatement = "Could not find player";
             }
         }
 
@@ -262,10 +264,10 @@ public class Util {
     public static Player getPlayer(int id) {
         Player player = null;
         ArrayList<Player> tempPlayerList = new ArrayList<>(loadPlayers());
-        for(Player p: tempPlayerList){
-            if(p.getPlayerNumber() == id){
-             player = p;
-             playerIndex = tempPlayerList.indexOf(p);
+        for (Player p : tempPlayerList) {
+            if (p.getPlayerNumber() == id) {
+                player = p;
+                playerIndex = tempPlayerList.indexOf(p);
             }
         }
         return player;
@@ -282,8 +284,8 @@ public class Util {
         saveGame(upcommingGame, nameOfFile);
     }
 
-    public static void createGamePlayed(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameTime, String filename){
-        Game playedGame = new Game( player, opposingTeam, result, gameTime);
+    public static void createGamePlayed(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameTime, String filename) {
+        Game playedGame = new Game(player, opposingTeam, result, gameTime);
         saveGame(playedGame, filename);
     }
 
