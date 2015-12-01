@@ -70,6 +70,9 @@ public class MenuSystem {
                             System.out.println("What do you want to edit?");
                             System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Goals \n7: Quit");
                             editPlayerMenu = scan.nextInt();
+
+                            //TODO make an if statement. If the player == keeper
+                            //TODO if player.getPos ... == keeper
                             switch (editPlayerMenu) {
                                 case 1:
 //                                  Name
@@ -85,6 +88,7 @@ public class MenuSystem {
                                     break;
                                 case 3:
                                     //Position
+                                    //TODO Print all the players
                                     System.out.println("What is the player's new position?");
                                     editPosition = scan.nextInt();
                                     player.setPosition(editPosition);
@@ -98,9 +102,11 @@ public class MenuSystem {
                                 case 5:
                                     //Game
                                     System.out.println("");
+                                    break;
                                 case 6:
                                     //Goals
                                     System.out.println("");
+                                    break;
                                 default:
                                     System.out.println("Please enter a valid number");
                                     break;
@@ -112,8 +118,8 @@ public class MenuSystem {
                             for (Player p : players) {
                                 System.out.println(p);
                             }
-                            System.out.println("Who do you want to remove ? ");
-                            System.out.println("Player number: ");
+                            System.out.println("Who do you want to remove?");
+                            System.out.println("Player number:");
                             playerNumber = scan.nextInt();
                             String conf = Util.deletePlayer(playerNumber);
                             System.out.println(conf);
@@ -129,7 +135,7 @@ public class MenuSystem {
                     gameMenu = scan.nextInt();
                     switch (gameMenu) {
                         case 1:
-                            System.out.println("Please select an option: \n1: Upcomming game \n2: Create Played game \n3: Cancle Upcomming Game \n4: Quit  ");
+                            System.out.println("Please select an option: \n1: Upcoming game \n2: Create Played game \n3: Cancel Upcoming Game \n4: Quit");
                             gameSubMenu = scan.nextInt();
                             switch (gameSubMenu) {
                                 case 1:
