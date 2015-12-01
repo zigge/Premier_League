@@ -73,12 +73,13 @@ public class MenuSystem {
 
                             playerNumber = scan.nextInt();
 
-                            System.out.println("What do you want to edit");
-                            System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Games won \n7: Games lost \n8: Tied games \n9: Goals \10: Quit");
+                            System.out.println("What do you want to edit?");
+                            System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Goals \n7: Quit");
                             editPlayerMenu = scan.nextInt();
                             switch (editPlayerMenu) {
                                 case 1:
                                     //Name
+                                   // playerNumber.setName(scan);
                                 case 2:
                                     //Salary
                                 case 3:
@@ -88,12 +89,6 @@ public class MenuSystem {
                                 case 5:
                                     //Game
                                 case 6:
-                                    //Games won
-                                case 7:
-                                    //Games lost
-                                case 8:
-                                    //Tied games
-                                case 9:
                                     //Goals
                                 default:
                                     System.out.println("Please enter a valid number");
