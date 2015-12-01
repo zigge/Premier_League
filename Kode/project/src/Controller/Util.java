@@ -104,6 +104,14 @@ public class Util {
         }
     }
 
+    public static void viewPlayers(){
+
+        ArrayList<Player> tempArray = new ArrayList<>(loadPlayers());
+        for(Player p : tempArray ){
+            System.out.println(p);
+        }
+    }
+
     public static Game loadGame(File locationOfGame) {
         //TODO Some code to load "Game"
         if (locationOfGame.exists()) {

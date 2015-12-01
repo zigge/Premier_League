@@ -14,8 +14,8 @@ import java.util.Scanner;
  */
 public class MenuSystem {
     private static Scanner scan;
-    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, playerToDelete, count, playerNumber;
-    private static String confDeletePlayer;
+    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, playerToDelete, count, playerNumber, editSalary, editPosition;
+    private static String confDeletePlayer, editName, editNationality;
     private static ArrayList<Player> playerList;
     private static boolean running;
     private final static String esc = "\u001b[2J";
@@ -55,41 +55,52 @@ public class MenuSystem {
                             Util.createPlayer("Asmir Begovi", 60000, 3, "Bosnia and Herzegovina", 1);
                             break;
                         case 2: //Show players
-
-                                ArrayList<Player> showPlayers = new ArrayList<>(Util.loadPlayers());
-                                for (Player p : showPlayers) {
-                                    System.out.println(p);
-                                }
+                                Util.viewPlayers();
                             break;
                         case 3: //Edit Player
                             //TODO Some code for "Edit player" - Henriette
-                            ArrayList<Player> editplayers = new ArrayList<>(Util.loadPlayers());
-                            for (Player p : editplayers) {
-                                System.out.println(p);
-                            }
+                            Util.viewPlayers();
 
                             System.out.println("Which player do you want to edit?");
                             System.out.println("Player number:");
 
                             playerNumber = scan.nextInt();
+                            Player player = Util.getPlayer(playerNumber);
 
                             System.out.println("What do you want to edit?");
                             System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Goals \n7: Quit");
                             editPlayerMenu = scan.nextInt();
                             switch (editPlayerMenu) {
                                 case 1:
-                                    //Name
-                                   // playerNumber.setName(scan);
+//                                  Name
+                                    System.out.println("What is the player's new name?");
+                                    editName = scan.next();
+                                    player.setName(editName);
+                                    break;
                                 case 2:
                                     //Salary
+                                    System.out.println("What is the player's new salary?");
+                                    editSalary = scan.nextInt();
+                                    player.setSalary(editSalary);
+                                    break;
                                 case 3:
                                     //Position
+                                    System.out.println("What is the player's new position?");
+                                    editPosition = scan.nextInt();
+                                    player.setPosition(editPosition);
+                                    break;
                                 case 4:
                                     //Nationality
+                                    System.out.println("What is the player's new nationality?");
+                                    editNationality = scan.next();
+                                    player.setNationality(editNationality);
+                                    break;
                                 case 5:
                                     //Game
+                                    System.out.println("");
                                 case 6:
                                     //Goals
+                                    System.out.println("");
                                 default:
                                     System.out.println("Please enter a valid number");
                                     break;
