@@ -58,6 +58,10 @@ public class MenuSystem {
                        case 2:
                            //TODO Some code for "View player" - Lucas
                            //Your task is to display the current players form the file "Playerfile" using the methode in util, loadPlayers.
+                           ArrayList<Player> showplayers = new ArrayList<>(Util.loadPlayers());
+                           for(Player p: showplayers) {
+                               System.out.println(p);
+                           }
                            break;
                        case 3:
                            //TODO Some code for "Edit player" - Henriette
