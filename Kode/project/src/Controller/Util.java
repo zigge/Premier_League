@@ -90,16 +90,12 @@ public class Util {
                 objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(playerFile))); //File to write to
                 objout.writeObject(player); //Writes to file
             } catch (IOException e) {
-                e.getCause();
-                e.getMessage();
                 e.printStackTrace();
 
             } finally {
                 try {
                     objout.close();
                 } catch (IOException e) {
-                    e.getCause();
-                    e.getMessage();
                     e.printStackTrace();
                 }
             }

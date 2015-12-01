@@ -48,19 +48,19 @@ public class MenuSystem {
                     System.out.println("Please select an option: \n1: New Player \n2: View players \n3: Edit player \n4: Delete Player \n5: Quit ");
                     playerMenu = scan.nextInt();
                     switch (playerMenu) {
-                        case 1:
+                        case 1: // Create Player
                             //TODO Some code for "new player" - Casper
                             //TODO Open issue: If two playes have the same name, what then?
                             // Casper, you need to make this check: if (pos > Util.fieldPosition.values().length || pos < 0), if the number is < 4 run else statement. This i when you set the position
                             // Casper, use the methode from Util.createPlayer, to create player. Your task is to make checks and switches for entering data intro the method
                             break;
-                        case 2:
+                        case 2: //Show players
                             ArrayList<Player> showPlayers = new ArrayList<>(Util.loadPlayers());
                             for (Player p : showPlayers) {
                                 System.out.println(p);
                             }
                             break;
-                        case 3:
+                        case 3: //Edit Player
                             //TODO Some code for "Edit player" - Henriette
                             ArrayList<Player> editplayers = new ArrayList<>(Util.loadPlayers());
                             for (Player p : editplayers) {
@@ -78,7 +78,6 @@ public class MenuSystem {
                             switch (editPlayerMenu) {
                                 case 1:
                                     //Name
-
                                 case 2:
                                     //Salary
                                 case 3:
@@ -100,7 +99,7 @@ public class MenuSystem {
                                     break;
                             }
                             break;
-                        case 4:
+                        case 4: //Delete player
                             //TODO Delete player - Lasse
                             ArrayList<Player> players = new ArrayList<>(Util.loadPlayers());
                             for (Player p : players) {
