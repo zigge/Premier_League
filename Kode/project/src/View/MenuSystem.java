@@ -75,7 +75,7 @@ public class MenuSystem {
 
                            System.out.println("Which player do you want to edit?");
                            System.out.println("Player number:");
-                           int playerNumber = scan.nextInt();
+                           int playerNumberEdit = scan.nextInt();
 
                            System.out.println("What do you want to edit");
                            System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Games won \n7: Games lost \n8: Tied games \n9: Goals \10: Quit");
