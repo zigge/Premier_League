@@ -25,15 +25,14 @@ public class MenuSystem {
     //Menu run class
     public static void menu() {
 
-        Player player1 = new Player("Test", 2000, 2, "Cuba", 6); //Test players!
+        /*Player player1 = new Player("Test", 2000, 2, "Cuba", 6); //Test players!
         Player player2 = new Player("Test2", 20003, 3, "Cuba", 9);// Test players!
         playerList = new ArrayList<>();
         playerList.add(player1);
-        playerList.add(player2);
+        playerList.add(player2);*/
 
         Util.createPlayerFolder();
         Util.createPlayerFile();
-        Util.savePlayers(playerList);
 
         scan = new Scanner(System.in);
         running = true;
@@ -53,12 +52,14 @@ public class MenuSystem {
                             //TODO Open issue: If two playes have the same name, what then?
                             // Casper, you need to make this check: if (pos > Util.fieldPosition.values().length || pos < 0), if the number is < 4 run else statement. This i when you set the position
                             // Casper, use the methode from Util.createPlayer, to create player. Your task is to make checks and switches for entering data intro the method
+                            Util.createPlayer("Asmir Begovi", 60000, 3, "Bosnia and Herzegovina", 1);
                             break;
                         case 2: //Show players
-                            ArrayList<Player> showPlayers = new ArrayList<>(Util.loadPlayers());
-                            for (Player p : showPlayers) {
-                                System.out.println(p);
-                            }
+
+                                ArrayList<Player> showPlayers = new ArrayList<>(Util.loadPlayers());
+                                for (Player p : showPlayers) {
+                                    System.out.println(p);
+                                }
                             break;
                         case 3: //Edit Player
                             //TODO Some code for "Edit player" - Henriette

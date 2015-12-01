@@ -108,7 +108,6 @@ public class Util {
         //TODO Some code to load "Game"
         if (locationOfGame.exists()) {
             try {
-
                 objin = new ObjectInputStream(new BufferedInputStream(new FileInputStream(locationOfGame)));
                 returnGame = (Game) objin.readObject();
 
@@ -153,7 +152,7 @@ public class Util {
                 e.printStackTrace();
 
             } catch (NullPointerException e) {
-                e.printStackTrace();
+                System.out.println("The playerFile is empty! Add players from \"Create Player\" ");
 
             } finally {
                 try {
