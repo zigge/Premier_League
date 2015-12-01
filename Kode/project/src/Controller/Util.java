@@ -243,6 +243,7 @@ public class Util {
     }
 
     public static void updatePlayer(Player player) {
+
         ArrayList<Player> tempArraylist = new ArrayList<>(loadPlayers());
         if(tempArraylist.size()!=0){
             tempArraylist.set(playerIndex, player);
@@ -252,6 +253,12 @@ public class Util {
             savePlayers(tempPlayerList);
         }
 
+    }
+
+    public static void updatePlayerList() {
+        ArrayList<Player> tempList = new ArrayList<>(loadPlayers());
+        tempList.addAll(tempPlayerList);
+        savePlayers(tempList);
     }
 
     public static void createGameUpcommingGame(String opposingTeam, LocalDate gameTime, String nameOfFile) {

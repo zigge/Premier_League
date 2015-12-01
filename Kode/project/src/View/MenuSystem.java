@@ -53,6 +53,7 @@ public class MenuSystem {
                             // Casper, you need to make this check: if (pos > Util.fieldPosition.values().length || pos < 0), if the number is < 4 run else statement. This i when you set the position
                             // Casper, use the methode from Util.createPlayer, to create player. Your task is to make checks and switches for entering data intro the method
                             Util.createPlayer("Asmir Begovi", 60000, 3, "Bosnia and Herzegovina", 1);
+                            Util.updatePlayer();
                             break;
                         case 2: //Show players
                                 Util.viewPlayers();
