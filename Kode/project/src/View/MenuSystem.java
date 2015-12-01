@@ -25,11 +25,14 @@ public class MenuSystem {
     //Menu run class
    public static void menu() {
 
-       /*Player player1 = new Player("Test", 2000, 2, "Cuba"); //Test players!
-       Player player2 = new Player("Test2", 20003, 3, "Cuba");// Test players!
+       Player player1 = new Player("Test", 2000, 2, "Cuba", 6); //Test players!
+       Player player2 = new Player("Test2", 20003, 3, "Cuba", 9);// Test players!
        playerList = new ArrayList<>();
        playerList.add(player1);
-       playerList.add(player2);*/
+       playerList.add(player2);
+
+       Util.createPlayerFile();
+       Util.savePlayers(playerList);
 
        scan = new Scanner(System.in);
        running = true;
@@ -60,8 +63,15 @@ public class MenuSystem {
                            break;
                        case 4:
                             //TODO Delete player - Lasse
-                           System.out.println(esc + home);
-
+                           ArrayList<Player> players = new ArrayList<>(Util.loadPlayers());
+                           for(Player p: players){
+                               System.out.println(p);
+                           }
+                           System.out.println("Who do you want to remove ? ");
+                           System.out.println("Player number: ");
+                           int playerNumber = scan.nextInt();
+                           String conf = Util.deletePlayer(playerNumber);
+                           System.out.println(conf);
 
                            break;
                        case 5:

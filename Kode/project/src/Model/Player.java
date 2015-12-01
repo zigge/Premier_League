@@ -26,6 +26,7 @@ public class Player implements Serializable {
         this.salary = salary;
         setPosition(position); // Sets position number -> 1 = "Forward position" with a call to methode "setPosition()"
         this.nationality = nationality;
+        this.playerNumber = playerNumber;
     }
 
     public String getName() {
@@ -134,7 +135,7 @@ public class Player implements Serializable {
 
     @Override
     public String toString(){
-        return "Name: " + getName() + " Nationalaty: " + getNationalaty() + " Salary: " + getSalary() + " Games: " + getGame() +
+        return "Name: " + getName() + " Nationalaty: " + getNationalaty() + "Player Number: " + getPlayerNumber() + " Salary: " + getSalary() + " Games: " + getGame() +
                 " Position: " + getPosition() + " Won: " + getGamesWon() + " Losses: " + getGamesLoss() + " Ties: " + getTies();
     }
 

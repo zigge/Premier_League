@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Model.Game;
@@ -19,6 +20,7 @@ public class Util {
     private static ObjectOutputStream objout = null;
     private static ObjectInputStream objin = null;
     private static Game returnGame;
+    private static int playerIndex;
 
     public static void saveGame(Game game, String fileName) {
         if (game != null) {
@@ -67,9 +69,10 @@ public class Util {
         }
     }
 
-    public static void savePlayer(ArrayList<Player> player) {
+    public static void savePlayers(ArrayList<Player> player) {
         //We wanna know where the players are saved, so that we can load them at the start of the program.
         file = createPlayerFile();
+        System.out.println(file);
         if (player.size() != 0) {
             try {
                 objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file))); //File to write to
@@ -142,7 +145,10 @@ public class Util {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
 
-            } finally {
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+
+            }finally {
                 try {
                     objin.close();
                 } catch (IOException e) {
@@ -198,7 +204,7 @@ public class Util {
 
     public static File createPlayerFile() {
         if (System.getProperty("os.name").contains("OS X")) {
-            playerFile = new File(System.getProperty("user.dir") + "/Playerfile" + ".txt"); // OSX/UNIX file system specific location /.../Playerfile
+            playerFile = new File(System.getProperty("user.dir") + "/Playerfile/playerFile" + ".txt"); // OSX/UNIX file system specific location /.../Playerfile
             return playerFile;
         } else {
             playerFile = new File(System.getProperty("user.dir") + "\\Playerfile\\playerlist" + ".txt"); //Windows file system specific location C:\...\Playerfile
@@ -225,13 +231,16 @@ public class Util {
     }
 
     public static String deletePlayer(int number) {
-
         String returnStatement = "";
         ArrayList<Player> tempPlayerArrayList = new ArrayList<>(loadPlayers());
         for(Player p: tempPlayerArrayList){
             if(p.getPlayerNumber() == number){
                 int index = tempPlayerArrayList.indexOf(p);
                 tempPlayerArrayList.remove(index);
+                for(Player d: tempPlayerArrayList){
+                    System.out.println(d);
+                }
+                savePlayers(tempPlayerArrayList);
                 returnStatement =  "Player: " + p + " deleted!";
             }else{
                 returnStatement =  "Could not find player";
@@ -247,17 +256,28 @@ public class Util {
         for(Player p: tempPlayerList){
             if(p.getPlayerNumber() == id){
              player = p;
+             playerIndex = tempPlayerList.indexOf(p);
             }
         }
         return player;
     }
 
-    public static void updatePlayer(Player player) {
+    public static ArrayList<Player> updatePlayer(Player player) {
+        ArrayList<Player> tempArraylist = new ArrayList<>(loadPlayers());
+        tempArraylist.set(playerIndex, player);
+        savePlayers(tempArraylist);
+        return tempArraylist;
 
     }
 
-    public static void createGame(){
+    public static void createGameUpcommingGame(String opposingTeam, LocalDate gameTime, String nameOfFile) {
+        Game upcommingGame = new Game(opposingTeam, gameTime);
+        saveGame(upcommingGame, nameOfFile);
+    }
 
+    public static void createGamePlayed(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameTime, String filename){
+        Game playedGame = new Game( player, opposingTeam, result, gameTime);
+        saveGame(playedGame, filename);
     }
 
     public enum fieldPosition {
