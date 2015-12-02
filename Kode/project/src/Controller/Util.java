@@ -296,10 +296,11 @@ public class Util {
     }
 
     public enum fieldPosition {
-        FORWARD("Forward position"),
+        KEEPER("Keeper position"),
         DEFENDER("Defending position"),
-        MIDFIELD("Midfield position"),
-        KEEPER("Keeper position");
+        MIDFIELDER("Midfield position"),
+        FORWARD("Forward position");
+
 
         private String positionOnField;
 

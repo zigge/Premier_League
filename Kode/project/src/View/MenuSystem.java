@@ -16,8 +16,8 @@ import java.util.Scanner;
  */
 public class MenuSystem {
     private static Scanner scan;
-    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, playerToDelete, count, playerNumber, editSalary, editPosition, hours, minutes, month, year, day, playerSalary, positionMenu;
-    private static String editName, editNationality, opposingTeam, time, playerName, playerNationality;
+    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, playerToDelete, count, playerNumber, editSalary, editPosition, hours, minutes, month, year, day, playerSalary, positionMenu, playerPosition;
+    private static String editName, editNationality, opposingTeam, time, playerName, playerNationality, playerFirstName, playerLastName;
     private static ArrayList<Player> playerList;
     private static boolean running;
     private final static String esc = "\u001b[2J";
@@ -48,19 +48,31 @@ public class MenuSystem {
                             // Casper, you need to make this check: if (pos > Util.fieldPosition.values().length || pos < 0), if the number is < 4 run else statement. This i when you set the position
                             // Casper, use the methode from Util.createPlayer, to create player. Your task is to make checks and switches for entering data intro the method
 
-                            System.out.println("Enter the full name of the player you want to create:");
-                            playerName = scan.next();
+                            System.out.println("Enter the first name of the player you want to create:");
+                            playerFirstName = scan.next();
+                            System.out.println("Enter the last name of the player you want to create:");
+                            playerLastName = scan.next();
+                            playerName = playerFirstName + " " + playerLastName;
                             System.out.println("Enter the salary for " + playerName + ":");
                             playerSalary = scan.nextInt();
                             System.out.println("Enter the player number for " + playerName + ":");
                             playerNumber = scan.nextInt();
                             System.out.println("Enter the nationality for " + playerName + ":");
                             playerNationality = scan.next();
-                            System.out.println("Select the position for " + playerName + ":");
-                            positionMenu = scan.nextInt();
+                            System.out.println("Select the position for " + playerName + ".");
+                            System.out.println("0: Keeper");
+                            System.out.println("1: Defender");
+                            System.out.println("2: Midfielder");
+                            System.out.println("3: Forward");
+                            playerPosition = scan.nextInt();
+                            if(playerPosition < 3 || playerPosition > 0){
+                                Util.createPlayer(playerName, playerSalary, playerPosition, playerNationality, playerNumber);
+                            } else if(playerPosition == 0){
+                                Util.createKeeper(playerName, playerSalary, playerPosition, playerNationality, playerNumber, 0);
+                            } else{
+                                System.out.println("An error has occured. You did not select a valid number for the position.");
+                            }
 
-                            Util.createPlayer("As Be growee", 60000, 1, "Bosnia and Herzegovina", 2); //Tests!
-                            Util.createKeeper("Keeper", 7000, 3, "Cuba", 1, 10); //Tests
                             Util.updatePlayerList();
                             break;
                         case 2: //Show players
@@ -192,6 +204,9 @@ public class MenuSystem {
                         case 5:
                             //TODO Quit
                             break;
+                        default:
+                            System.out.println("Please enter a valid number");
+                            break;
                     }
 
                 case 2:
@@ -232,6 +247,9 @@ public class MenuSystem {
 
                         case 3:
                             //TODO Some code for quitting program
+                        default:
+                            System.out.println("Please enter a valid number");
+                            break;
                     }
                 case 3:
                     break;
