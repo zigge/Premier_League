@@ -133,6 +133,8 @@ public class Util {
                 e.getMessage();
                 e.printStackTrace();
 
+            } catch (NullPointerException e){
+                System.out.println("Playerfile is empty!");
             } finally {
                 try {
                     objin.close();
