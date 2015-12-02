@@ -27,9 +27,15 @@ public class Util {
     private static int playerIndex;
 
     public static void createPlayer(String name, int salary, int position, String nationality, int playerNumber) {
-        tempPlayerList = new ArrayList<>();
+        tempPlayerList = new ArrayList<>(loadPlayers());
         Player player = new Player(name, salary, position, nationality, playerNumber);
-        tempPlayerList.add(player);
+        for(Player p: tempPlayerList) {
+            if (player.getPlayerNumber()!= (p.getPlayerNumber())) {
+                tempPlayerList.add(player);
+            }else{
+                System.out.println("Player already exists");
+            }
+        }
     }
 
     public static void createKeeper(String name, int salary, int position, String nationality, int playerNumber, int saves) {
