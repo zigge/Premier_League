@@ -16,8 +16,8 @@ import java.util.Scanner;
  */
 public class MenuSystem {
     private static Scanner scan;
-    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, playerToDelete, count, playerNumber, editSalary, editPosition, hours, minutes, month, year, day;
-    private static String editName, editNationality, opposingTeam, time;
+    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, playerToDelete, count, playerNumber, editSalary, editPosition, hours, minutes, month, year, day, playerSalary, positionMenu;
+    private static String editName, editNationality, opposingTeam, time, playerName, playerNationality;
     private static ArrayList<Player> playerList;
     private static boolean running;
     private final static String esc = "\u001b[2J";
@@ -47,6 +47,18 @@ public class MenuSystem {
                             //TODO Open issue: If two playes have the same name, what then?
                             // Casper, you need to make this check: if (pos > Util.fieldPosition.values().length || pos < 0), if the number is < 4 run else statement. This i when you set the position
                             // Casper, use the methode from Util.createPlayer, to create player. Your task is to make checks and switches for entering data intro the method
+
+                            System.out.println("Enter the full name of the player you want to create:");
+                            playerName = scan.next();
+                            System.out.println("Enter the salary for " + playerName + ":");
+                            playerSalary = scan.nextInt();
+                            System.out.println("Enter the player number for " + playerName + ":");
+                            playerNumber = scan.nextInt();
+                            System.out.println("Enter the nationality for " + playerName + ":");
+                            playerNationality = scan.next();
+                            System.out.println("Select the position for " + playerName + ":");
+                            positionMenu = scan.nextInt();
+
                             Util.createPlayer("As Be growee", 60000, 1, "Bosnia and Herzegovina", 2); //Tests!
                             Util.createKeeper("Keeper", 7000, 3, "Cuba", 1, 10); //Tests
                             Util.updatePlayerList();
