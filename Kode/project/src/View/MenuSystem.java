@@ -74,12 +74,9 @@ public class MenuSystem {
                             System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Goals \n7: Saves \n8: Quit");
                             editPlayerMenu = scan.nextInt();
 
-                            //TODO make an if statement. If the player == keeper
-                            //TODO if player.getPos ... == keeper
-
                                 switch (editPlayerMenu) {
                                     case 1:
-//                                  Name
+                                        //Name
                                         System.out.println("What is the play123456er's new name?");
                                         editName = scan.next();
                                         player.setName(editName);
@@ -92,6 +89,7 @@ public class MenuSystem {
                                         break;
                                     case 3:
                                         //Position
+
                                         //TODO Print all the players
                                         System.out.println("What is the player's new position?");
                                         editPosition = scan.nextInt();
