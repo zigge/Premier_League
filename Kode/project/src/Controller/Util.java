@@ -270,9 +270,13 @@ public class Util {
     }
 
     public static void updatePlayerList() {
-        ArrayList<Player> tempList = new ArrayList<>(loadPlayers());
-        tempList.addAll(tempPlayerList);
-        savePlayers(tempList);
+        try {
+            ArrayList<Player> tempList = new ArrayList<>(loadPlayers());
+            tempList.addAll(tempPlayerList);
+            savePlayers(tempList);
+        } catch (NullPointerException e) {
+            savePlayers(tempPlayerList);
+        }
     }
 
     public static void createGameUpcommingGame(String opposingTeam, LocalDate gameDate , LocalTime gameTime,  String nameOfFile) {
