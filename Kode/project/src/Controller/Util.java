@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Model.Game;
+import Model.Keeper;
 import Model.Player;
 
 /**
@@ -28,6 +29,12 @@ public class Util {
         tempPlayerList = new ArrayList<>();
         Player player = new Player(name, salary, position, nationality, playerNumber);
         tempPlayerList.add(player);
+    }
+
+    public static void createKeeper(String name, int salary, int position, String nationality, int playerNumber, int saves) {
+        Keeper keeper = new Keeper(name, salary, position, nationality, playerNumber, saves);
+        tempPlayerList.add(keeper);
+
     }
 
     public static void saveGame(Game game, String fileName) {
@@ -78,21 +85,21 @@ public class Util {
     }
 
     public static void savePlayers(ArrayList<Player> players) {
-    ObjectOutputStream objout = null;
+        ObjectOutputStream objout = null;
         try {
-                objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(playerFile))); //File to write to
-                objout.writeObject(players); //Writes to file
+            objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(playerFile))); //File to write to
+            objout.writeObject(players); //Writes to file
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (objout != null) {
+                    objout.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    if(objout != null) {
-                        objout.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
+        }
     }
 
     public static void viewPlayers() {
@@ -104,7 +111,7 @@ public class Util {
     }
 
     public static Game loadGame(File locationOfGame) {
-    ObjectInputStream objin = null;
+        ObjectInputStream objin = null;
         //TODO Some code to load "Game"
         if (locationOfGame.exists()) {
             try {
@@ -209,23 +216,20 @@ public class Util {
         }
     }
 
-    public static String deletePlayer(int number) {
-
+    public static String deletePlayer(int number, ArrayList<Player> players) {
+        int index = -1;
         String returnStatement = "";
-        ArrayList<Player> tempPlayerArrayList = new ArrayList<>(loadPlayers());
-        for (Player p : tempPlayerArrayList) {
+        for (Player p : players) {
             if (p.getPlayerNumber() == number) {
-                int index = tempPlayerArrayList.indexOf(p);
-                tempPlayerArrayList.remove(index);
-                for (Player d : tempPlayerArrayList) {
-                    System.out.println(d);
-                }
-                savePlayers(tempPlayerArrayList);
+                index = players.indexOf(p);
                 returnStatement = "Player: " + p + " deleted!";
+                break;
             } else {
                 returnStatement = "Could not find player";
             }
         }
+        players.remove(index);
+        savePlayers(players);
 
         return returnStatement;
     }
@@ -245,11 +249,11 @@ public class Util {
     public static void updatePlayer(Player player) {
 
         ArrayList<Player> tempArraylist = new ArrayList<>(loadPlayers());
-        if(tempArraylist.size()!=0){
+        if (tempArraylist.size() != 0) {
             tempArraylist.set(playerIndex, player);
             tempArraylist.addAll(tempPlayerList);
             savePlayers(tempArraylist);
-        }else{
+        } else {
             savePlayers(tempPlayerList);
         }
 

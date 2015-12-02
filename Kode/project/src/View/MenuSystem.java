@@ -169,7 +169,7 @@ public class MenuSystem {
                             System.out.println("Who do you want to remove?");
                             System.out.println("Player number:");
                             playerNumber = scan.nextInt();
-                            String conf = Util.deletePlayer(playerNumber);
+                            String conf = Util.deletePlayer(playerNumber, players);
                             System.out.println(conf);
 
                             break;
