@@ -70,7 +70,7 @@ public class MenuSystem {
 
                             System.out.println("What do you want to edit?");
 
-                            if(player.getPosition().equals ("Keeper position")) {
+                            if(player.getPosition().equals("Keeper position")) {
                             System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Goals \n7: Saves \n8: Quit");
                             editPlayerMenu = scan.nextInt();
 
