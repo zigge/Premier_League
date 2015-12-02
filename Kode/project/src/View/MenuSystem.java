@@ -52,7 +52,7 @@ public class MenuSystem {
                             //TODO Open issue: If two playes have the same name, what then?
                             // Casper, you need to make this check: if (pos > Util.fieldPosition.values().length || pos < 0), if the number is < 4 run else statement. This i when you set the position
                             // Casper, use the methode from Util.createPlayer, to create player. Your task is to make checks and switches for entering data intro the method
-                            Util.createPlayer("Asmir Begovi", 60000, 3, "Bosnia and Herzegovina", 1);
+                            Util.createPlayer("As Be growee", 60000, 3, "Bosnia and Herzegovina", 2);
                             Util.updatePlayerList();
                             break;
                         case 2: //Show players
@@ -69,48 +69,95 @@ public class MenuSystem {
                             Player player = Util.getPlayer(playerNumber);
 
                             System.out.println("What do you want to edit?");
-                            System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Goals \n7: Quit");
+
+                            if(player.getPosition().equals ("Keeper position")) {
+                            System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Goals \n7: Saves \n8: Quit");
                             editPlayerMenu = scan.nextInt();
 
                             //TODO make an if statement. If the player == keeper
                             //TODO if player.getPos ... == keeper
-                            switch (editPlayerMenu) {
-                                case 1:
+
+                                switch (editPlayerMenu) {
+                                    case 1:
 //                                  Name
-                                    System.out.println("What is the player's new name?");
-                                    editName = scan.next();
-                                    player.setName(editName);
-                                    break;
-                                case 2:
-                                    //Salary
-                                    System.out.println("What is the player's new salary?");
-                                    editSalary = scan.nextInt();
-                                    player.setSalary(editSalary);
-                                    break;
-                                case 3:
-                                    //Position
-                                    //TODO Print all the players
-                                    System.out.println("What is the player's new position?");
-                                    editPosition = scan.nextInt();
-                                    player.setPosition(editPosition);
-                                    break;
-                                case 4:
-                                    //Nationality
-                                    System.out.println("What is the player's new nationality?");
-                                    editNationality = scan.next();
-                                    player.setNationality(editNationality);
-                                    break;
-                                case 5:
-                                    //Game
-                                    System.out.println("");
-                                    break;
-                                case 6:
-                                    //Goals
-                                    System.out.println("");
-                                    break;
-                                default:
-                                    System.out.println("Please enter a valid number");
-                                    break;
+                                        System.out.println("What is the play123456er's new name?");
+                                        editName = scan.next();
+                                        player.setName(editName);
+                                        break;
+                                    case 2:
+                                        //Salary
+                                        System.out.println("What is the player's new salary?");
+                                        editSalary = scan.nextInt();
+                                        player.setSalary(editSalary);
+                                        break;
+                                    case 3:
+                                        //Position
+                                        //TODO Print all the players
+                                        System.out.println("What is the player's new position?");
+                                        editPosition = scan.nextInt();
+                                        player.setPosition(editPosition);
+                                        break;
+                                    case 4:
+                                        //Nationality
+                                        System.out.println("What is the player's new nationality?");
+                                        editNationality = scan.next();
+                                        player.setNationality(editNationality);
+                                        break;
+                                    case 5:
+                                        //Game
+                                        System.out.println("");
+                                        break;
+                                    case 6:
+                                        //Goals
+                                        System.out.println("");
+                                        break;
+                                    default:
+                                        System.out.println("Please enter a valid number");
+                                        break;
+                                }
+
+                                }else{
+                                System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Goals \n7: Quit");
+                                editPlayerMenu = scan.nextInt();
+                                switch (editPlayerMenu) {
+                                    case 1:
+//                                  Name
+                                        System.out.println("What is the playwsedfgher's new name?");
+                                        editName = scan.next();
+                                        player.setName(editName);
+                                        break;
+                                    case 2:
+                                        //Salary
+                                        System.out.println("What is the player's new salary?");
+                                        editSalary = scan.nextInt();
+                                        player.setSalary(editSalary);
+                                        break;
+                                    case 3:
+                                        //Position
+                                        //TODO Print all the players
+                                        System.out.println("What is the player's new position?");
+                                        editPosition = scan.nextInt();
+                                        player.setPosition(editPosition);
+                                        break;
+                                    case 4:
+                                        //Nationality
+                                        System.out.println("What is the player's new nationality?");
+                                        editNationality = scan.next();
+                                        player.setNationality(editNationality);
+                                        break;
+                                    case 5:
+                                        //Game
+                                        System.out.println("");
+                                        break;
+                                    case 6:
+                                        //Goals
+                                        System.out.println("");
+                                        break;
+                                    default:
+                                        System.out.println("Please enter a valid number");
+                                        break;
+                                }
+
                             }
                             break;
                         case 4: //Delete player
