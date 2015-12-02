@@ -5,6 +5,8 @@ import Model.Player;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -14,8 +16,8 @@ import java.util.Scanner;
  */
 public class MenuSystem {
     private static Scanner scan;
-    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, playerToDelete, count, playerNumber, editSalary, editPosition;
-    private static String confDeletePlayer, editName, editNationality;
+    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, playerToDelete, count, playerNumber, editSalary, editPosition, hours, minutes, month, year, day;
+    private static String editName, editNationality, opposingTeam, time;
     private static ArrayList<Player> playerList;
     private static boolean running;
     private final static String esc = "\u001b[2J";
@@ -52,7 +54,8 @@ public class MenuSystem {
                             //TODO Open issue: If two playes have the same name, what then?
                             // Casper, you need to make this check: if (pos > Util.fieldPosition.values().length || pos < 0), if the number is < 4 run else statement. This i when you set the position
                             // Casper, use the methode from Util.createPlayer, to create player. Your task is to make checks and switches for entering data intro the method
-                            Util.createPlayer("As Be growee", 60000, 3, "Bosnia and Herzegovina", 2);
+                            Util.createPlayer("As Be growee", 60000, 1, "Bosnia and Herzegovina", 2); //Tests!
+                            Util.createKeeper("Keeper", 7000, 3, "Cuba", 1, 10); //Tests
                             Util.updatePlayerList();
                             break;
                         case 2: //Show players
@@ -185,6 +188,21 @@ public class MenuSystem {
                             gameSubMenu = scan.nextInt();
                             switch (gameSubMenu) {
                                 case 1:
+                                    System.out.println("Please enter the opposing team for the upcomming game: ");
+                                    opposingTeam = scan.next();
+                                    System.out.println("Please enter time for the game in hours: ");
+                                    hours = scan.nextInt();
+                                    System.out.println("Please enter time for the game in minutes: ");
+                                    minutes = scan.nextInt();
+                                    LocalTime timeOfGame = LocalTime.of(hours, minutes);
+                                    System.out.println("Please enter the month for the game 1-12:  ");
+                                    month = scan.nextInt();
+                                    System.out.println("Please enter the day for the game in numbers: ");
+                                    day = scan.nextInt();
+                                    System.out.println("Please enter the year for the game numbers: ");
+                                    year = scan.nextInt();
+                                    LocalDate gameDate = LocalDate.of(year, month, day);
+                                    Util.createGameUpcommingGame(opposingTeam, gameDate, timeOfGame, opposingTeam);
 
                                 case 2:
                                     //TODO Some code for post game info, REMEMBER the function "saveGame()" takes two parameters.

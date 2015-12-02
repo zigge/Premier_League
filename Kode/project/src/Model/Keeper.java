@@ -21,6 +21,7 @@ public class Keeper extends Player {
         this.saves = saves;
     }
 
+    @Override
     public String toString(){
         return "Name: " + getName() + " Nationalaty: " + getNationalaty() + "Player Number: " + getPlayerNumber() + " Salary: " + getSalary() + " Games: " + getGame() +
                 " Position: " + getPosition() + " Won: " + getGamesWon() + " Losses: " + getGamesLoss() + " Ties: " + getTies() + " Saves: " + getSaves();

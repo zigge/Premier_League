@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import Model.Game;
@@ -269,13 +270,13 @@ public class Util {
         savePlayers(tempList);
     }
 
-    public static void createGameUpcommingGame(String opposingTeam, LocalDate gameTime, String nameOfFile) {
-        Game upcommingGame = new Game(opposingTeam, gameTime);
+    public static void createGameUpcommingGame(String opposingTeam, LocalDate gameDate , LocalTime gameTime,  String nameOfFile) {
+        Game upcommingGame = new Game(opposingTeam, gameDate, gameTime);
         saveGame(upcommingGame, nameOfFile);
     }
 
-    public static void createGamePlayed(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameTime, String filename) {
-        Game playedGame = new Game(player, opposingTeam, result, gameTime);
+    public static void createGamePlayed(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime, String filename) {
+        Game playedGame = new Game(player, opposingTeam, result, gameDate, gameTime);
         saveGame(playedGame, filename);
     }
 

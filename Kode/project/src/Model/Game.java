@@ -2,6 +2,7 @@ package Model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 
@@ -13,21 +14,24 @@ public class Game implements Serializable {
     private ArrayList<Player> players;
     private String opposingTeam;
     private String result;
-    private LocalDate gameTime;
+    private LocalDate gameDate;
+    private LocalTime gameTime;
     private boolean gameCanceled;
 
 //    TODO: Verify this constructor
-    public Game(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameTime) {
+    public Game(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime) {
 //    TODO: Fill out constructor for game
         this.opposingTeam = opposingTeam;
         this.result = result;
+        this.gameDate = gameDate;
         this.gameTime = gameTime;
         this.players = player;
 
     }
 //    TODO: Verify this constructor
-    public Game(String opposingTeam, LocalDate gameTime) {
+    public Game(String opposingTeam, LocalDate gameDate, LocalTime gameTime) {
         this.opposingTeam = opposingTeam;
+        this.gameDate = gameDate;
         this.gameTime = gameTime;
     }
 
@@ -43,7 +47,7 @@ public class Game implements Serializable {
         return result;
     }
 
-    public LocalDate getGameTime() {
+    public LocalTime getGameTime() {
         return gameTime;
     }
 
@@ -59,8 +63,16 @@ public class Game implements Serializable {
         this.result = result;
     }
 
-    public void setGameTime(LocalDate gameTime) {
+    public void setGameTime(LocalTime gameTime) {
         this.gameTime = gameTime;
+    }
+
+    public void setGameDate(LocalDate gameDate) {
+        this.gameDate = gameDate;
+    }
+
+    public LocalDate getGameDate() {
+        return gameDate;
     }
 
     public void setGameCanceled(boolean gameCanceled) {
