@@ -104,16 +104,19 @@ public class Util {
     }
 
     public static void viewPlayers() {
-
-        ArrayList<Player> tempArray = new ArrayList<>(loadPlayers());
-        if (tempArray.size() != 0) {
-            for (Player p : tempArray) {
-                System.out.println(p);
-            }
-        }else {
+        try {
+            ArrayList<Player> tempArray = new ArrayList<>(loadPlayers());
+            if (tempArray.size() != 0) {
+                for (Player p : tempArray) {
+                    System.out.println(p);
+                }
+            } else {
                 System.out.println("You have no players on your current team");
             }
+        }catch (NullPointerException e){
+            System.out.println("Player File is empty! ");
         }
+    }
 
     public static Game loadGame(File locationOfGame) {
         ObjectInputStream objin = null;
