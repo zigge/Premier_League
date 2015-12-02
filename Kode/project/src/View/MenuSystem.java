@@ -80,7 +80,7 @@ public class MenuSystem {
                                 switch (editPlayerMenu) {
                                     case 1:
                                         //Name
-                                        System.out.println("What is the play123456er's new name?");
+                                        System.out.println("What is the player's new name?");
                                         editName = scan.next();
                                         player.setName(editName);
                                         break;
@@ -92,8 +92,12 @@ public class MenuSystem {
                                         break;
                                     case 3:
                                         //Position
-
-                                        //TODO Print all the players
+                                        System.out.println("The positions:");
+                                        int count = 0;
+                                        for(Util.fieldPosition f : Util.fieldPosition.values()){
+                                            count++;
+                                            System.out.println(count + ": "+ f.getPositionOnField());
+                                        }
                                         System.out.println("What is the player's new position?");
                                         editPosition = scan.nextInt();
                                         player.setPosition(editPosition);
@@ -106,7 +110,13 @@ public class MenuSystem {
                                         break;
                                     case 5:
                                         //Game
-                                        System.out.println("");
+                                        System.out.println("Number of games the player has played: "+player.getGame());
+                                        int i;
+                                        int addGame;
+                                        addGame = scan.nextInt();
+                                        for(i = player.getGame(); i >= 0; i+=addGame) {
+                                            System.out.println(i);
+                                        }
                                         break;
                                     case 6:
                                         //Goals
@@ -123,7 +133,7 @@ public class MenuSystem {
                                 switch (editPlayerMenu) {
                                     case 1:
 //                                  Name
-                                        System.out.println("What is the playwsedfgher's new name?");
+                                        System.out.println("What is the player's new name?");
                                         editName = scan.next();
                                         player.setName(editName);
                                         break;
