@@ -135,8 +135,8 @@ public class Player implements Serializable {
 
     @Override
     public String toString(){
-        return "Name: " + getName() + " Nationalaty: " + getNationalaty() + " Player Number: " + getPlayerNumber() + " Salary: " + getSalary() + " Games: " + getGame() +
-                " Position: " + getPosition() + " Won: " + getGamesWon() + " Losses: " + getGamesLoss() + " Ties: " + getTies();
+        return "Name: " + getName() + "." + " Nationality: " + getNationalaty() + "." + " Player Number: " + getPlayerNumber() + "." + " Salary: " + getSalary() + "." + " Games: " + getGame() +
+               "." + " Position: " + getPosition() + "." + " Won: " + getGamesWon() + "." + " Losses: " + getGamesLoss() + "." + " Ties: " + getTies() + ".";
     }
 
 }
