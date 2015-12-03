@@ -20,22 +20,16 @@ public class Util {
     private static File playerFile, file;
     private static File playerDir = new File("PlayerFile");
     private static File playedGameDir = new File("PlayedGames");
-    private static File upcommingGames = new File("UpcommingGames");
+    private static File upcommingGamesDir = new File("UpcommingGames");
     private static ObjectInputStream objin = null;
-    private static ArrayList<Player> tempPlayerList, mergeList;
+    private static ArrayList<Player> exceptionList, mergeList;
+    private static ArrayList<Player> tempPlayerList = new ArrayList<Player>();
     private static Game returnGame;
     private static int playerIndex;
 
     public static void createPlayer(String name, int salary, int position, String nationality, int playerNumber) {
-        tempPlayerList = new ArrayList<>(loadPlayers());
         Player player = new Player(name, salary, position, nationality, playerNumber);
-        for(Player p: tempPlayerList) {
-            if (player.getPlayerNumber()!= (p.getPlayerNumber())) {
-                tempPlayerList.add(player);
-            }else{
-                System.out.println("Player already exists");
-            }
-        }
+        tempPlayerList.add(player);
     }
 
     public static void createKeeper(String name, int salary, int position, String nationality, int playerNumber, int saves) {
@@ -47,7 +41,7 @@ public class Util {
     public static void saveGame(Game game, String fileName) {
         ObjectOutputStream objout = null;
         if (game != null) {
-            if (game.getResult() == null) {
+            if (game.getResult() != null) {
                 try {
                     objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/PlayedGames" + fileName + " - playedGame.txt")));
                     objout.writeObject(game);
@@ -67,7 +61,7 @@ public class Util {
                 }
             } else {
                 try {
-                    objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "UpcommingGames" + fileName + " - upcommingGame.txt")));
+                    objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/UpcommingGames" + fileName + " - upcommingGame.txt")));
                     objout.writeObject(game);
 
                 } catch (IOException e) {
@@ -110,18 +104,23 @@ public class Util {
     }
 
     public static void viewPlayers() {
-        try {
+        ArrayList<Player> tempPlayer = new ArrayList<>(loadPlayers());
+        for (Player p : tempPlayer) {
+            System.out.println(p);
+        }
+        /*try {
             ArrayList<Player> tempArray = new ArrayList<>(loadPlayers());
             if (tempArray.size() != 0) {
                 for (Player p : tempArray) {
                     System.out.println(p);
                 }
+
             } else {
                 System.out.println("You have no players on your current team");
             }
         }catch (NullPointerException e){
             System.out.println("Player File is empty! ");
-        }
+        }*/
     }
 
     public static Game loadGame(File locationOfGame) {
@@ -215,20 +214,24 @@ public class Util {
     }
 
     public static void createPlayedGamesFolder() {
+        if (!playedGameDir.exists()) {
+            try {
+                playedGameDir.mkdir();
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            }
+        } else {
 
-        try {
-            playedGameDir.mkdir();
-        } catch (SecurityException e) {
-            e.printStackTrace();
         }
     }
 
     public static void createUpcommingGameFolder() {
-
-        try {
-            upcommingGames.mkdir();
-        } catch (SecurityException e) {
-            e.printStackTrace();
+        if (!upcommingGamesDir.exists()) {
+            try {
+                upcommingGamesDir.mkdir();
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            }
         }
     }
 
