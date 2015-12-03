@@ -43,7 +43,7 @@ public class Util {
         if (game != null) {
             if (game.getResult() != null) {
                 try {
-                    objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/PlayedGames" + fileName + " - playedGame.txt")));
+                    objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/PlayedGames/" + fileName + " - playedGame.txt")));
                     objout.writeObject(game);
                 } catch (IOException e) {
                     e.getCause();
@@ -61,7 +61,7 @@ public class Util {
                 }
             } else {
                 try {
-                    objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/UpcommingGames" + fileName + " - upcommingGame.txt")));
+                    objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/UpcommingGames/" + fileName + " - upcommingGame.txt")));
                     objout.writeObject(game);
 
                 } catch (IOException e) {
@@ -104,11 +104,7 @@ public class Util {
     }
 
     public static void viewPlayers() {
-        ArrayList<Player> tempPlayer = new ArrayList<>(loadPlayers());
-        for (Player p : tempPlayer) {
-            System.out.println(p);
-        }
-        /*try {
+        try {
             ArrayList<Player> tempArray = new ArrayList<>(loadPlayers());
             if (tempArray.size() != 0) {
                 for (Player p : tempArray) {
@@ -120,7 +116,7 @@ public class Util {
             }
         }catch (NullPointerException e){
             System.out.println("Player File is empty! ");
-        }*/
+        }
     }
 
     public static Game loadGame(File locationOfGame) {
@@ -293,8 +289,8 @@ public class Util {
         saveGame(upcommingGame, nameOfFile);
     }
 
-    public static void createGamePlayed(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime, String filename) {
-        Game playedGame = new Game(player, opposingTeam, result, gameDate, gameTime);
+    public static void createGamePlayed(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime, ArrayList<String> goals,String filename) {
+        Game playedGame = new Game(player, opposingTeam, result, gameDate, gameTime, goals);
         saveGame(playedGame, filename);
     }
 

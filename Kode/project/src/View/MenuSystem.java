@@ -28,9 +28,11 @@ public class MenuSystem {
     public static void menu() {
         Util.createPlayerFolder();
         Util.createPlayerFile();
-        Util.createKeeper("Test", 2, 0, "denmark", 1, 1);
+        Util.createUpcommingGameFolder();
+        Util.createPlayedGamesFolder();
+        /*Util.createKeeper("Test", 2, 0, "denmark", 1, 1);
         Util.createPlayer("Test2", 2, 1, "Denmark", 1);
-        Util.updatePlayerList();
+        Util.updatePlayerList();*/
 
         scan = new Scanner(System.in);
         running = true;
@@ -67,10 +69,11 @@ public class MenuSystem {
                             System.out.println("2: Midfielder");
                             System.out.println("3: Forward");
                             playerPosition = scan.nextInt();
-                            if (playerPosition < 3 || playerPosition > 0) {
-                                System.out.println("here");
+                            if (playerPosition <= 3 && playerPosition > 0) {
+                                System.out.println("Player!");
                                 Util.createPlayer(playerName, playerSalary, playerPosition, playerNationality, playerNumber);
                             } else if (playerPosition == 0) {
+                                System.out.println("Keeper!");
                                 Util.createKeeper(playerName, playerSalary, playerPosition, playerNationality, playerNumber, 0);
                             } else {
                                 System.out.println("An error has occured. You did not select a valid number for the position.");

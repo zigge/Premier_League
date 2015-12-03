@@ -1,9 +1,11 @@
 package Model;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 public class Game implements Serializable {
 
     private ArrayList<Player> players;
+    private ArrayList<String> goals;
     private String opposingTeam;
     private String result;
     private LocalDate gameDate;
@@ -19,13 +22,14 @@ public class Game implements Serializable {
     private boolean gameCanceled;
 
 //    TODO: Verify this constructor
-    public Game(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime) {
+    public Game(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime, ArrayList<String> goals) {
 //    TODO: Fill out constructor for game
         this.opposingTeam = opposingTeam;
         this.result = result;
         this.gameDate = gameDate;
         this.gameTime = gameTime;
-        this.players = player;
+        players = player;
+        setGoals(goals);
 
     }
 //    TODO: Verify this constructor
@@ -35,8 +39,10 @@ public class Game implements Serializable {
         this.gameTime = gameTime;
     }
 
-    public ArrayList<Player> getPlayers() {
-        return players;
+    public void getPlayers() {
+        for(Player p: players) {
+            System.out.println(p);
+        }
     }
 
     public String getOpposingTeam() {
@@ -81,6 +87,25 @@ public class Game implements Serializable {
 
     public boolean isGameCanceled() {
         return gameCanceled;
+    }
+
+    public void setGoals(ArrayList<String> goals) {
+        if(goals.size() != 0){
+            this.goals = goals;
+        }else{
+            System.out.println("The score of the game was 0-0");
+        }
+    }
+
+    public void getGoals() {
+        for(String s: goals){
+            System.out.println(s);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Chelsea vs  " + getOpposingTeam() + "The Result of the game was: " + getResult() + "and it was played on " + getGameDate() + "at " + getGameTime();
     }
 }
 
