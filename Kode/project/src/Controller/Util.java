@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import Model.Game;
 import Model.Keeper;
 import Model.Player;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  * Created by lassebjorklund on 20/11/15.
@@ -103,13 +104,15 @@ public class Util {
         }
     }
 
-    public static void viewPlayers() {
+    public static Boolean viewPlayers() {
+        Boolean playesIsThere = false;
         try {
             ArrayList<Player> tempArray = new ArrayList<>(loadPlayers());
             if (tempArray.size() != 0) {
                 for (Player p : tempArray) {
                     System.out.println(p);
                 }
+                playesIsThere = true;
 
             } else {
                 System.out.println("You have no players on your current team");
@@ -117,6 +120,7 @@ public class Util {
         }catch (NullPointerException e){
             System.out.println("Player File is empty! ");
         }
+        return playesIsThere;
     }
 
     public static Game loadGame(File locationOfGame) {

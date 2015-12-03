@@ -4,20 +4,19 @@ import Controller.Util;
 import Model.Player;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by lassebjorklund on 21/11/15.
  */
 public class MenuSystem {
     private static Scanner scan;
-    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, playerToDelete, count, playerNumber, editSalary, editPosition, hours, minutes, month, year, day, playerSalary, positionMenu, playerPosition;
-    private static String editName, editNationality, opposingTeam, time, playerName, playerNationality, playerFirstName, playerLastName;
+    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, playerToDelete, count, playerNumber, editSalary, editPosition, playerSalary, positionMenu, playerPosition;
+    private static String editName, editNationality, opposingTeam, time, playerName, playerNationality, playerFirstName, day, playerNumberString;
     private static ArrayList<Player> playerList;
     private static boolean running;
     private final static String esc = "\u001b[2J";
@@ -30,9 +29,9 @@ public class MenuSystem {
         Util.createPlayerFile();
         Util.createUpcommingGameFolder();
         Util.createPlayedGamesFolder();
-        /*Util.createKeeper("Test", 2, 0, "denmark", 1, 1);
-        Util.createPlayer("Test2", 2, 1, "Denmark", 1);
-        Util.updatePlayerList();*/
+        Util.createKeeper("Test", 2, 0, "Denmark", 1, 1);
+        Util.createPlayer("Test2", 2, 1, "Denmark", 2);
+        Util.updatePlayerList();
 
         scan = new Scanner(System.in);
         running = true;
@@ -226,23 +225,41 @@ public class MenuSystem {
                                     System.out.println("Please enter the opposing team for the upcomming game: ");
                                     scan.nextLine();
                                     opposingTeam = scan.nextLine();
-                                    System.out.println("Please enter time for the game in hours: ");
-                                    hours = scan.nextInt();
-                                    System.out.println("Please enter time for the game in minutes: ");
-                                    minutes = scan.nextInt();
-                                    LocalTime timeOfGame = LocalTime.of(hours, minutes);
-                                    System.out.println("Please enter the month for the game 1-12:  ");
-                                    month = scan.nextInt();
-                                    System.out.println("Please enter the day for the game in numbers: ");
-                                    day = scan.nextInt();
-                                    System.out.println("Please enter the year for the game numbers: ");
-                                    year = scan.nextInt();
-                                    LocalDate gameDate = LocalDate.of(year, month, day);
+                                    System.out.println("Please enter time for the game: HH-MM-SS ");
+                                    time = scan.next();
+                                    LocalTime timeOfGame = LocalTime.parse(time);
+                                    System.out.println("Please enter date of game: YYYY-MM-DD");
+                                    day = scan.next();
+                                    LocalDate gameDate = LocalDate.parse(day);
                                     Util.createGameUpcommingGame(opposingTeam, gameDate, timeOfGame, opposingTeam);
 
                                 case 2:
-                                    //TODO Some code for post game info, REMEMBER the function "saveGame()" takes two parameters.
-                                    //TODO A File, and a Game object. The file is the inputted location from a scanner.
+                                    System.out.println("Played Game!");
+                                    System.out.println("Please enter opposing team: ");
+                                    scan.nextLine();
+                                    opposingTeam = scan.nextLine();
+                                    System.out.println("Please enter the date for the game, in the format: YYYY-MM-DD");
+                                    time = scan.next();
+                                    LocalDate machdate = LocalDate.parse(time);
+                                    System.out.println("Please add players who played the game by playernumber seperated by periot: ");
+                                    if(Util.viewPlayers()){
+//                                        Util.viewPlayers();
+                                        scan.nextLine();
+                                        playerNumberString = scan.next(); // There is probably a better way to do this...
+                                        ArrayList<Integer> playerNumberIntList = new ArrayList<>();
+                                        ArrayList<String> playerNumberList = new ArrayList<>(Arrays.asList(playerNumberString.split(",")));
+                                        playerList = new ArrayList<>();
+                                        for(String s: playerNumberList){
+                                            playerNumberIntList.add(Integer.parseInt(s));
+                                        }
+                                        for(Integer p: playerNumberIntList){
+                                            playerList.add(Util.getPlayer(p));
+                                        }
+                                        for(Player p: playerList){
+                                            System.out.println(p);
+                                        }
+                                    }
+
 
                                 case 3:
                                     //TODO Edit game code. This is only for the variable gameCanceled in game, no delition or edit of other att in a game.
