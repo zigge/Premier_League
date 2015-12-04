@@ -1,16 +1,11 @@
 package Controller;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 
 import Model.Game;
 import Model.Keeper;
@@ -27,19 +22,49 @@ public class Util {
     private static File playedGameDir = new File("PlayedGames");
     private static File upcommingGamesDir = new File("UpcommingGames");
     private static ObjectInputStream objin = null;
-    private static ArrayList<Player> exceptionList, mergeList;
-    private static ArrayList<Player> tempPlayerList = new ArrayList<>();
+    private static ArrayList<Player> loadList;
     private static Game returnGame;
     private static int playerIndex;
 
     public static void createPlayer(String name, int salary, int position, String nationality, int playerNumber) {
         Player player = new Player(name, salary, position, nationality, playerNumber);
-        tempPlayerList.add(player);
+        Boolean isPlayerThere = false;
+        try {
+            loadList = new ArrayList<>(loadPlayers());
+            for (Player p : loadList) {
+                if (player.getPlayerNumber() == p.getPlayerNumber() || player.getName().equalsIgnoreCase(p.getName())) {
+                    isPlayerThere = true;
+                } else {
+
+                }
+            }
+            if(isPlayerThere){
+                System.out.println("player exists!");
+            }else {
+                loadList.add(player);
+                savePlayers(loadList);
+            }
+        }catch (NullPointerException e ){
+            loadList = new ArrayList<>();
+            loadList.add(player);
+            savePlayers(loadList);
+
+        }
     }
 
     public static void createKeeper(String name, int salary, int position, String nationality, int playerNumber, int saves) {
-        Keeper keeper = new Keeper(name, salary, position, nationality, playerNumber, saves);
-        tempPlayerList.add(keeper);
+        loadList = new ArrayList<>(loadPlayers());
+        Keeper keeper = new Keeper(name,salary,position,nationality,playerNumber,saves);
+        for(Player p : loadList){
+            if(keeper.getPlayerNumber() != p.getPlayerNumber() || !keeper.getName().equalsIgnoreCase(p.getName())){
+                loadList.add(keeper);
+                savePlayers(loadList);
+                return;
+            }else {
+                System.out.println("Player exists");
+            }
+        }
+
     }
 
     public static void saveGame(Game game, String fileName) {
@@ -122,7 +147,7 @@ public class Util {
             } else {
                 System.out.println("You have no players on your current team");
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("Player File is empty! ");
         }
         return playesIsThere;
@@ -146,7 +171,7 @@ public class Util {
                 e.getMessage();
                 e.printStackTrace();
 
-            } catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 System.out.println("Playerfile is empty!");
             } finally {
                 try {
@@ -270,54 +295,34 @@ public class Util {
         return player;
     }
 
-    public static void updatePlayer(Player player) {
+//    public static void updatePlayer(Player player) {
+//
+//        ArrayList<Player> tempArraylist = new ArrayList<>(loadPlayers());
+//        if (tempArraylist.size() != 0) {
+//            System.out.println(tempPlayerList.size());
+//            tempArraylist.set(playerIndex, player);
+//            tempArraylist.addAll(tempPlayerList);
+//            savePlayers(tempArraylist);
+//            tempArraylist.clear();
+//        } else {
+//            savePlayers(tempPlayerList);
+//            tempArraylist.clear();
+//
+//        }
+//
+//    }
 
-        ArrayList<Player> tempArraylist = new ArrayList<>(loadPlayers());
-        if (tempArraylist.size() != 0) {
-            System.out.println(tempPlayerList.size());
-            tempArraylist.set(playerIndex, player);
-            tempArraylist.addAll(tempPlayerList);
-            savePlayers(tempArraylist);
-            tempArraylist.clear();
-        } else {
-            savePlayers(tempPlayerList);
-            tempArraylist.clear();
-
-        }
-
-    }
-
-    public static void updatePlayerList() {
-        try {
-            ArrayList<Player> tempList = new ArrayList<>(loadPlayers());
-            ArrayList<Player> resultList = new ArrayList<>();
-            for(Player p: tempList){
-                for(Player s: tempPlayerList){
-                    if(p.getPlayerNumber() != s.getPlayerNumber() && !p.getName().equalsIgnoreCase(s.getName())){
-                        resultList.add(s);
-                    }else{
-
-                    }
-                }
-            }
-            savePlayers();
-        } catch (NullPointerException e) {
-            savePlayers(tempPlayerList);
-            tempPlayerList.clear();
-        }
-    }
-
-    public static void createGameUpcommingGame(String opposingTeam, LocalDate gameDate , LocalTime gameTime,  String nameOfFile) {
+    public static void createGameUpcommingGame(String opposingTeam, LocalDate gameDate, LocalTime gameTime, String nameOfFile) {
         Game upcommingGame = new Game(opposingTeam, gameDate, gameTime);
         saveGame(upcommingGame, nameOfFile);
     }
 
-    public static void createGamePlayed(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime, ArrayList<String> goals,String filename) {
+    public static void createGamePlayed(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime, ArrayList<String> goals, String filename) {
         Game playedGame = new Game(player, opposingTeam, result, gameDate, gameTime, goals);
         saveGame(playedGame, filename);
     }
 
-    public static  ArrayList<String> listFilesUpcomming() {
+    public static ArrayList<String> listFilesUpcomming() {
         ArrayList<String> filterFilenames = new ArrayList<>();
         ArrayList<String> fileNameArray = new ArrayList<>(Arrays.asList(upcommingGamesDir.list())); // Gets the contents of the folder
         for (String f : fileNameArray) {
@@ -330,7 +335,7 @@ public class Util {
 
     }
 
-    public static  ArrayList<String> listFilesPlayed() {
+    public static ArrayList<String> listFilesPlayed() {
         ArrayList<String> filterFilenames = new ArrayList<>();
         ArrayList<String> fileNameArray = new ArrayList<>(Arrays.asList(playedGameDir.list())); // Gets the contents of the folder
         for (String f : fileNameArray) {

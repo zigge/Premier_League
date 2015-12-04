@@ -78,7 +78,6 @@ public class MenuSystem {
                                 } else {
                                     System.out.println("An error has occured. You did not select a valid number for the position.");
                                 }
-                                Util.updatePlayerList();
                                 break;
                             case 2: //Show players
                                 Util.viewPlayers();
@@ -154,7 +153,7 @@ public class MenuSystem {
                                             System.out.println("Please enter a valid number");
                                             break;
                                     }
-                                    Util.updatePlayer(player); //Updates player att's
+                                   // Util.updatePlayer(player); //Updates player att's
 
                                 } else {
                                     System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Goals \n7: Quit");
@@ -197,7 +196,7 @@ public class MenuSystem {
                                             System.out.println("Please enter a valid number");
                                             break;
                                     }
-                                    Util.updatePlayer(player);
+                                   // Util.updatePlayer(player);
 
                                 }
                                 break;
