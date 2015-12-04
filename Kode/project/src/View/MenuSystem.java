@@ -140,7 +140,6 @@ public class MenuSystem {
                                             System.out.println("Number of games the player has played: " + player.getGame());
                                             count = scan.nextInt();
                                             player.setGame(count);
-
                                             break;
                                         case 6:
                                             //Goals
@@ -277,6 +276,8 @@ public class MenuSystem {
                                                     scan.nextLine();
                                                     String timeOfGoal = scan.nextLine();
                                                     goals.add("Player: " + playerName + " scored at: " + timeOfGoal);
+                                                    Player player = Util.getPlayer(playerNumber);
+                                                    player.setGoal(1);
                                                     System.out.println("Add another player ?");
                                                     String addPlayer = scan.next();
                                                     addMorePlayers = !addPlayer.equalsIgnoreCase("yes");
@@ -321,11 +322,9 @@ public class MenuSystem {
                                                 game.getGoals();
                                             }
 
-
                                         }catch (Exception e){
 
                                         }
-
 
                                         break;
 

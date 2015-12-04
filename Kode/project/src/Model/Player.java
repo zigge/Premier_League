@@ -18,7 +18,7 @@ public class Player implements Serializable {
     private int lost;
     private int ties;
     private int playerNumber;
-    private String goal; //Consists of two ints
+    private int goal; //Consists of two ints
 
     public Player(String name, int salary, int position, String nationality, int playerNumber) {
 
@@ -64,7 +64,7 @@ public class Player implements Serializable {
         return ties;
     }
 
-    public String getGoal() {
+    public int getGoal() {
 
         return goal;
     }
@@ -123,7 +123,7 @@ public class Player implements Serializable {
         this.ties += ties;
     }
 
-    public void setGoal(String goal) {
+    public void setGoal(int goal) {
 
         this.goal = goal;
     }
