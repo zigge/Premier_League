@@ -125,7 +125,7 @@ public class Player implements Serializable {
 
     public void setGoal(int goal) {
 
-        this.goal = goal;
+        this.goal += goal;
     }
 
     public void setPlayerNumber(int number){
