@@ -99,7 +99,7 @@ public class Player implements Serializable {
 
     public void setNationality(String nationality) {
 
-        nationality = nationality;
+        this.nationality = nationality;
     }
 
     public void setGame(int game) {
@@ -132,11 +132,19 @@ public class Player implements Serializable {
         playerNumber = number;
     }
 
+    public boolean compare(Player s){
+        if(this.getPlayerNumber() == s.getPlayerNumber()){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
     @Override
     public String toString(){
         return "Name: " + getName() + "." + " Nationality: " + getNationalaty() + "." + " Player Number: " + getPlayerNumber() + "." + " Salary: " + getSalary() + "." + " Games: " + getGame() +
                "." + " Position: " + getPosition() + "." + " Won: " + getGamesWon() + "." + " Losses: " + getGamesLoss() + "." + " Ties: " + getTies() + ".";
     }
+
 
 }

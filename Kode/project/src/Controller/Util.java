@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import Model.Game;
 import Model.Keeper;
@@ -25,7 +28,7 @@ public class Util {
     private static File upcommingGamesDir = new File("UpcommingGames");
     private static ObjectInputStream objin = null;
     private static ArrayList<Player> exceptionList, mergeList;
-    private static ArrayList<Player> tempPlayerList = new ArrayList<Player>();
+    private static ArrayList<Player> tempPlayerList = new ArrayList<>();
     private static Game returnGame;
     private static int playerIndex;
 
@@ -37,7 +40,6 @@ public class Util {
     public static void createKeeper(String name, int salary, int position, String nationality, int playerNumber, int saves) {
         Keeper keeper = new Keeper(name, salary, position, nationality, playerNumber, saves);
         tempPlayerList.add(keeper);
-
     }
 
     public static void saveGame(Game game, String fileName) {
@@ -92,6 +94,8 @@ public class Util {
         try {
             objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(playerFile))); //File to write to
             objout.writeObject(players); //Writes to file
+
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -270,11 +274,15 @@ public class Util {
 
         ArrayList<Player> tempArraylist = new ArrayList<>(loadPlayers());
         if (tempArraylist.size() != 0) {
+            System.out.println(tempPlayerList.size());
             tempArraylist.set(playerIndex, player);
             tempArraylist.addAll(tempPlayerList);
             savePlayers(tempArraylist);
+            tempArraylist.clear();
         } else {
             savePlayers(tempPlayerList);
+            tempArraylist.clear();
+
         }
 
     }
@@ -282,10 +290,20 @@ public class Util {
     public static void updatePlayerList() {
         try {
             ArrayList<Player> tempList = new ArrayList<>(loadPlayers());
-            tempList.addAll(tempPlayerList);
-            savePlayers(tempList);
+            ArrayList<Player> resultList = new ArrayList<>();
+            for(Player p: tempList){
+                for(Player s: tempPlayerList){
+                    if(p.getPlayerNumber() != s.getPlayerNumber() && !p.getName().equalsIgnoreCase(s.getName())){
+                        resultList.add(s);
+                    }else{
+
+                    }
+                }
+            }
+            savePlayers();
         } catch (NullPointerException e) {
             savePlayers(tempPlayerList);
+            tempPlayerList.clear();
         }
     }
 

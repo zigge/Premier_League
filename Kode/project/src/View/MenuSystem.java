@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by lassebjorklund on 21/11/15.
@@ -32,10 +33,9 @@ public class MenuSystem {
             Util.createPlayerFile();
             Util.createUpcommingGameFolder();
             Util.createPlayedGamesFolder();
-            /*Util.createKeeper("Test", 2, 0, "Denmark", 1, 1);
-            Util.createPlayer("Test2", 2, 1, "Denmark", 2);
+           /* Util.createKeeper("Test", 2, 0, "Denmark", 1, 1); //TEST PLAYERS
+            Util.createPlayer("Test2", 2, 1, "Denmark", 2); //TEST PLAYERS
             Util.updatePlayerList();*/
-
             scan = new Scanner(System.in);
             running = true;
 
@@ -72,10 +72,8 @@ public class MenuSystem {
                                 System.out.println("3: Forward");
                                 playerPosition = scan.nextInt();
                                 if (playerPosition <= 3 && playerPosition > 0) {
-                                    System.out.println("Player!");
                                     Util.createPlayer(playerName, playerSalary, playerPosition, playerNationality, playerNumber);
                                 } else if (playerPosition == 0) {
-                                    System.out.println("Keeper!");
                                     Util.createKeeper(playerName, playerSalary, playerPosition, playerNationality, playerNumber, 0);
                                 } else {
                                     System.out.println("An error has occured. You did not select a valid number for the position.");
@@ -84,6 +82,12 @@ public class MenuSystem {
                                 break;
                             case 2: //Show players
                                 Util.viewPlayers();
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (Exception e) {
+                                    System.out.println(e);
+                                }
+                                System.out.println(esc + home);
                                 break;
                             case 3: //Edit Player
                                 //TODO Some code for "Edit player" - Henriette
@@ -150,6 +154,7 @@ public class MenuSystem {
                                             System.out.println("Please enter a valid number");
                                             break;
                                     }
+                                    Util.updatePlayer(player); //Updates player att's
 
                                 } else {
                                     System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Goals \n7: Quit");
@@ -192,6 +197,7 @@ public class MenuSystem {
                                             System.out.println("Please enter a valid number");
                                             break;
                                     }
+                                    Util.updatePlayer(player);
 
                                 }
                                 break;
@@ -277,11 +283,7 @@ public class MenuSystem {
                                                     goals.add("Player: " + playerName + " scored at: " + timeOfGoal);
                                                     System.out.println("Add another player ?");
                                                     String addPlayer = scan.next();
-                                                    if(addPlayer.equalsIgnoreCase("yes")){
-                                                        addMorePlayers = false;
-                                                    }else{
-                                                        addMorePlayers = true;
-                                                    }
+                                                    addMorePlayers = !addPlayer.equalsIgnoreCase("yes");
                                                 }
                                         }else{
                                             System.out.println("No goals was added");
@@ -297,8 +299,9 @@ public class MenuSystem {
                                         }
 
                                     case 3:
-                                        //TODO Edit game code. This is only for the variable gameCanceled in game, no delition or edit of other att in a game.
+                                        //TODO Edit game code. This is only for the variable gameCanceled in game, no deletion or edit of other att in a game.
                                     case 4:
+                                        break;
                                 }
                             case 2:
                                 //TODO Some code for viewing game from file
@@ -355,11 +358,12 @@ public class MenuSystem {
 
                                     default:
                                         System.out.println("Please select a number from the menu!");
+                                        break;
 
                                 }
 
                             case 3:
-                                //TODO Some code for quitting program
+                                break;
                             default:
                                 System.out.println("Please enter a valid number");
                                 break;
