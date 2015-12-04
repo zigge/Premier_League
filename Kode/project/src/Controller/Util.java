@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import Model.Game;
 import Model.Keeper;
@@ -296,6 +297,32 @@ public class Util {
     public static void createGamePlayed(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime, ArrayList<String> goals,String filename) {
         Game playedGame = new Game(player, opposingTeam, result, gameDate, gameTime, goals);
         saveGame(playedGame, filename);
+    }
+
+    public static  ArrayList<String> listFilesUpcomming() {
+        ArrayList<String> filterFilenames = new ArrayList<>();
+        ArrayList<String> fileNameArray = new ArrayList<>(Arrays.asList(upcommingGamesDir.list())); // Gets the contents of the folder
+        for (String f : fileNameArray) {
+            if (f.endsWith(".txt")) {
+                filterFilenames.add(f); // adds strings with the ending ".txt" to filter output to user.
+            }
+        }
+
+        return filterFilenames;
+
+    }
+
+    public static  ArrayList<String> listFilesPlayed() {
+        ArrayList<String> filterFilenames = new ArrayList<>();
+        ArrayList<String> fileNameArray = new ArrayList<>(Arrays.asList(playedGameDir.list())); // Gets the contents of the folder
+        for (String f : fileNameArray) {
+            if (f.endsWith(".txt")) {
+                filterFilenames.add(f); // adds strings with the ending ".txt" to filter output to user.
+            }
+        }
+
+        return filterFilenames;
+
     }
 
     public enum fieldPosition {
