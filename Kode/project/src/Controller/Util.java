@@ -53,18 +53,29 @@ public class Util {
     }
 
     public static void createKeeper(String name, int salary, int position, String nationality, int playerNumber, int saves) {
-        loadList = new ArrayList<>(loadPlayers());
-        Keeper keeper = new Keeper(name,salary,position,nationality,playerNumber,saves);
-        for(Player p : loadList){
-            if(keeper.getPlayerNumber() != p.getPlayerNumber() || !keeper.getName().equalsIgnoreCase(p.getName())){
+        Keeper keeper = new Keeper(name, salary, position, nationality, playerNumber, saves);
+        Boolean isPlayerThere = false;
+        try {
+            loadList = new ArrayList<>(loadPlayers());
+            for (Player p : loadList) {
+                if (keeper.getPlayerNumber() == p.getPlayerNumber() || keeper.getName().equalsIgnoreCase(p.getName())) {
+                    isPlayerThere = true;
+                } else {
+
+                }
+            }
+            if(isPlayerThere){
+                System.out.println("player exists!");
+            }else {
                 loadList.add(keeper);
                 savePlayers(loadList);
-                return;
-            }else {
-                System.out.println("Player exists");
             }
-        }
+        }catch (NullPointerException e ){
+            loadList = new ArrayList<>();
+            loadList.add(keeper);
+            savePlayers(loadList);
 
+        }
     }
 
     public static void saveGame(Game game, String fileName) {
