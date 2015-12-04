@@ -18,7 +18,7 @@ public class Keeper extends Player {
     }
 
     public void setSaves(int saves) {
-        this.saves = saves;
+        this.saves += saves;
     }
 
     @Override

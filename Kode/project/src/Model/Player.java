@@ -104,22 +104,23 @@ public class Player implements Serializable {
 
     public void setGame(int game) {
 
-        this.game = game;
+        this.game += game;
+
     }
 
     public void setGamesWon(int gamesWon) {
 
-        this.won = gamesWon;
+        this.won += gamesWon;
     }
 
     public void setGamesLoss(int gamesLoss) {
 
-        this.lost = gamesLoss;
+        this.lost += gamesLoss;
     }
 
     public void setTies(int ties) {
 
-        this.ties = ties;
+        this.ties += ties;
     }
 
     public void setGoal(String goal) {

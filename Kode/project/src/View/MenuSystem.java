@@ -138,12 +138,9 @@ public class MenuSystem {
                                         case 5:
                                             //Game
                                             System.out.println("Number of games the player has played: " + player.getGame());
-                                            int i;
-                                            int addGame;
-                                            addGame = scan.nextInt();
-                                            for (i = player.getGame(); i >= 0; i += addGame) {
-                                                System.out.println(i);
-                                            }
+                                            count = scan.nextInt();
+                                            player.setGame(count);
+
                                             break;
                                         case 6:
                                             //Goals
