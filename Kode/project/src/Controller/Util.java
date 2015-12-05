@@ -148,7 +148,7 @@ public class Util {
     public static Boolean viewPlayers() {
         Boolean playesIsThere = false;
         try {
-            ArrayList<Player> tempArray = new ArrayList<>(loadPlayers());
+            ArrayList<Player> tempArray = loadPlayers();
             if (tempArray.size() != 0) {
                 for (Player p : tempArray) {
                     System.out.println(p);
@@ -296,7 +296,7 @@ public class Util {
 
     public static Player getPlayer(int id) {
         Player player = null;
-        ArrayList<Player> tempPlayerList = new ArrayList<>(loadPlayers());
+        ArrayList<Player> tempPlayerList = loadPlayers();
         for (Player p : tempPlayerList) {
             if (p.getPlayerNumber() == id) {
                 player = p;
@@ -306,22 +306,19 @@ public class Util {
         return player;
     }
 
-//    public static void updatePlayer(Player player) {
-//
-//        ArrayList<Player> tempArraylist = new ArrayList<>(loadPlayers());
-//        if (tempArraylist.size() != 0) {
-//            System.out.println(tempPlayerList.size());
-//            tempArraylist.set(playerIndex, player);
-//            tempArraylist.addAll(tempPlayerList);
-//            savePlayers(tempArraylist);
-//            tempArraylist.clear();
-//        } else {
-//            savePlayers(tempPlayerList);
-//            tempArraylist.clear();
-//
-//        }
-//
-//    }
+    public static void updatePlayer(Player player) {
+        ArrayList<Player> tempArraylist = new ArrayList<>(loadPlayers());
+        if (tempArraylist.size() != 0) {
+            tempArraylist.set(playerIndex, player);
+            savePlayers(tempArraylist);
+            tempArraylist.clear();
+        } else {
+            savePlayers(tempArraylist);
+            tempArraylist.clear();
+
+        }
+
+    }
 
     public static void createGameUpcommingGame(String opposingTeam, LocalDate gameDate, LocalTime gameTime, String nameOfFile) {
         Game upcommingGame = new Game(opposingTeam, gameDate, gameTime);

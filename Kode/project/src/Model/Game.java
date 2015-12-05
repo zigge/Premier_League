@@ -13,6 +13,7 @@ import java.util.Arrays;
  */
 public class Game implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private ArrayList<Player> players;
     private ArrayList<String> goals;
     private String opposingTeam;
