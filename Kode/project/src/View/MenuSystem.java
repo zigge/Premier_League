@@ -11,6 +11,7 @@ import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -329,16 +330,32 @@ public class MenuSystem {
                                         continue;
 
                                     case 2:
-                                        System.out.println("Please enter opposing team: ");
+                                        int opposingTeamGoals = 0;
+                                        int homeGoal = 0;
+                                        String resultOfGame = "";
+                                        Player player = null;
+                                        LocalDate dateOfGame = null;
+                                        LocalTime gameTime = null;
+                                        System.out.println("Please enter the opposing team for this game: ");
                                         scan.nextLine();
-                                        opposingTeam = scan.nextLine();
-                                        System.out.println("Please enter the date for the game, in the format: YYYY-MM-DD");
-                                        time = scan.next();
-                                        LocalDate machdate = LocalDate.parse(time);
-                                        System.out.println("Please enter time for the game: HH:MM:SS ");
-                                        time = scan.next();
-                                        LocalTime timeOfPlayedGame = LocalTime.parse(time);
-                                        System.out.println("Please add players who played the game by playernumber seperated by periot: ");
+                                        try {
+                                            opposingTeam = scan.nextLine();
+                                        } catch (InputMismatchException e) {
+                                            scan.nextLine();
+                                        }
+                                        System.out.println("Please enter the date for the game: YYYY-MM-DD ");
+                                        scan.nextLine();
+                                        try {
+                                            day = scan.nextLine();
+                                            dateOfGame = LocalDate.parse(day);
+                                            System.out.println("Please enter the time for the game: HH:MM:SS");
+                                            scan.nextLine();
+                                            time = scan.nextLine();
+                                            gameTime = LocalTime.parse(time);
+                                        } catch (DateTimeParseException e) {
+                                            scan.nextLine();
+                                        }
+                                        System.out.println("What players was in the game ? ");
                                         if (Util.viewPlayers()) {
                                             scan.nextLine();
                                             playerNumberString = scan.next(); // There is probably a better way to do this...
@@ -352,52 +369,52 @@ public class MenuSystem {
                                                 playerList.add(Util.getPlayer(p));
                                             }
                                         }
-                                        System.out.println("Was there any goals this game: ");
-                                        wasThereGolas = scan.next();
-                                        if (wasThereGolas.equalsIgnoreCase("yes")) {
-                                            System.out.println("add goals for opposing team or home team ? ");
-                                            scan.nextLine();
-                                            String addGoalsTeam = scan.nextLine();
-                                            switch (addGoalsTeam) {
-                                                case "Home":
-                                                    while (!addMorePlayers) {
-                                                        System.out.println("Which player scored ?");
-                                                        for (Player p : playerList) {
-                                                            System.out.println(p);
-                                                            p.setGame(1);
-                                                        }
-                                                        System.out.println("player number: ");
-                                                        playerNumber = scan.nextInt();
-                                                        String playerName = Util.getPlayer(playerNumber).getName();
-                                                        System.out.println("When did he score ?");
-                                                        scan.nextLine();
-                                                        String timeOfGoal = scan.nextLine();
-                                                        goals.add("Player: " + playerName + " scored at: " + timeOfGoal);
-                                                        Player player = Util.getPlayer(playerNumber);
-                                                        player.setGoal(1);
-                                                        System.out.println("Add another player ?");
-                                                        String addPlayer = scan.next();
-                                                        addMorePlayers = !addPlayer.equalsIgnoreCase("yes");
+
+                                        System.out.println("How many goals for the opposing team? ");
+                                        try {
+                                            opposingTeamGoals = scan.nextInt();
+                                            System.out.println("how many goals for home team");
+                                            homeGoal = scan.nextInt();
+                                        } catch (InputMismatchException e) {
+                                            scan.nextInt();
+                                        }
+                                        if (homeGoal != 0) {
+
+                                            while (addMorePlayers) {
+                                                System.out.println("Add player who scored: ");
+                                                int playerToAddGoals = scan.nextInt();
+
+                                                for (Player p : playerList) {
+                                                    if (p.getPlayerNumber() == playerToAddGoals) {
+                                                        player = p;
                                                     }
-                                                    continue;
-                                                case "Opposing":
-                                                    System.out.println("How many goals for the opposing team?");
-                                                    int opposingTeamGoals = scan.nextInt();
-                                                    goals.add("0-" + opposingTeamGoals);
-                                                    continue;
+
+                                                }
+                                                System.out.println("When did he score ? ");
+                                                try {
+                                                    int goalsToAdd = scan.nextInt();
+                                                    goals.add("Player: " + player.getName() + "Scored at: " + goalsToAdd);
+                                                } catch (InputMismatchException e) {
+                                                    scan.nextInt();
+                                                }
+                                                System.out.println("Add more players? yes/no");
+
+                                                String choise = scan.next();
+                                                if (choise.contains("yes")) {
+                                                    addMorePlayers = true;
+                                                } else {
+                                                    addMorePlayers = false;
+                                                }
+
+                                                resultOfGame = homeGoal + " - " + opposingTeamGoals;
+
                                             }
                                         } else {
-                                            System.out.println("No goals was added");
-                                            goals.add("0-0");
+                                            resultOfGame = homeGoal + "-" + opposingTeamGoals;
+                                            goals.add("No goals for home team");
                                         }
 
-
-                                        if (!goals.get(0).contains("0-")) {
-                                            String resultOfGame = goals.get(0);
-                                            Util.createGamePlayed(playerList, opposingTeam, resultOfGame, machdate, timeOfPlayedGame, goals, opposingTeam);
-                                        } else {
-                                            System.out.println("result is not maching the number of goals!");
-                                        }
+                                        Game game = new Game(playerList, opposingTeam, resultOfGame, dateOfGame, gameTime, goals);
 
                                     case 3:
                                         //TODO Edit game code. This is only for the variable gameCanceled in game, no deletion or edit of other att in a game.
