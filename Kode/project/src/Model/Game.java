@@ -17,18 +17,20 @@ public class Game implements Serializable {
     private ArrayList<Player> players;
     private ArrayList<String> goals;
     private String opposingTeam;
+    private String strategy;
     private String result;
     private LocalDate gameDate;
     private LocalTime gameTime;
     private boolean gameCanceled;
 
 //    TODO: Verify this constructor
-    public Game(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime, ArrayList<String> goals) {
+    public Game(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime, String strategy, ArrayList<String> goals) {
 //    TODO: Fill out constructor for game
         this.opposingTeam = opposingTeam;
         this.result = result;
         this.gameDate = gameDate;
         this.gameTime = gameTime;
+        this.strategy = strategy;
         players = player;
         setGoals(goals);
 
@@ -86,6 +88,14 @@ public class Game implements Serializable {
         this.gameCanceled = gameCanceled;
     }
 
+    public String getStrategy() {
+        return strategy;
+    }
+
+    public void setStrategy(String strategy) {
+        this.strategy = strategy;
+    }
+
     public boolean isGameCanceled() {
         return gameCanceled;
     }
@@ -106,7 +116,7 @@ public class Game implements Serializable {
 
     @Override
     public String toString() {
-        return "Chelsea vs  " + getOpposingTeam() + " The Result of the game was: " + getResult() + " and it was played on " + getGameDate() + " at " + getGameTime();
+        return "Chelsea vs  " + getOpposingTeam() + " The Result of the game was: " + getResult() + " and it was played on " + getGameDate() + " at " + getGameTime() + "with the strategy" + getStrategy();
     }
 }
 

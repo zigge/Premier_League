@@ -325,8 +325,8 @@ public class Util {
         saveGame(upcommingGame, nameOfFile);
     }
 
-    public static void createGamePlayed(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime, ArrayList<String> goals, String filename) {
-        Game playedGame = new Game(player, opposingTeam, result, gameDate, gameTime, goals);
+    public static void createGamePlayed(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime, String strategy, ArrayList<String> goals, String filename) {
+        Game playedGame = new Game(player, opposingTeam, result, gameDate, gameTime, strategy, goals);
         saveGame(playedGame, filename);
     }
 
@@ -364,7 +364,6 @@ public class Util {
 
 
         private String positionOnField;
-
 
         public String getPositionOnField() {
             return positionOnField;
