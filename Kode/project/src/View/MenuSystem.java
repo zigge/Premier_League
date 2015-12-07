@@ -4,6 +4,7 @@ import Controller.Util;
 import Model.Game;
 import Model.Keeper;
 import Model.Player;
+import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.io.File;
 import java.lang.reflect.Array;
@@ -80,7 +81,7 @@ public class MenuSystem {
                                 } else {
                                     System.out.println("An error has occured. You did not select a valid number for the position.");
                                 }
-                                break;
+                                continue;
                             case 2: //Show players
                                 Util.viewPlayers();
                                 try {
@@ -89,7 +90,7 @@ public class MenuSystem {
                                     System.out.println(e);
                                 }
                                 System.out.println(esc + home);
-                                break;
+                                continue;
                             case 3: //Edit Player
                                 //TODO Some code for "Edit player" - Henriette
                                 Util.viewPlayers();
@@ -101,7 +102,8 @@ public class MenuSystem {
                                 //TODO Make match on player, and typecast object to "keeper" like: keeper = (Keeper) Util.getPlayer(playerNumber);
                                 System.out.println("What do you want to edit?");
 
-                                if (player.getPosition().equals("Keeper position")) {
+                                if (Util.getPlayer(playerNumber).getPosition().equals("Keeper position")) {
+                                    Keeper keeper = (Keeper) Util.getPlayer(playerNumber);
                                     System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game Options \n6: Goals \n7: Saves \n8: Quit");
                                     editPlayerMenu = scan.nextInt();
 
@@ -110,13 +112,13 @@ public class MenuSystem {
                                             //Name
                                             System.out.println("What is the keeper's new name?");
                                             editName = scan.next();
-                                            player.setName(editName);
+                                            keeper.setName(editName);
                                             break;
                                         case 2:
                                             //Salary
                                             System.out.println("What is the keeper's new salary?");
                                             editSalary = scan.nextInt();
-                                            player.setSalary(editSalary);
+                                            keeper.setSalary(editSalary);
                                             break;
                                         case 3:
                                             //Position
@@ -128,13 +130,13 @@ public class MenuSystem {
                                             }
                                             System.out.println("What is the player's new position?");
                                             editPosition = scan.nextInt();
-                                            player.setPosition(editPosition);
+                                            keeper.setPosition(editPosition);
                                             break;
                                         case 4:
                                             //Nationality
                                             System.out.println("What is the keeper's new nationality?");
                                             editNationality = scan.next();
-                                            player.setNationality(editNationality);
+                                            keeper.setNationality(editNationality);
                                             break;
                                         case 5:
                                             System.out.println("Please select a game option \n1: Total Games \n2: Games Won \n3: Games Lost \n4: Games Tied");
@@ -142,54 +144,60 @@ public class MenuSystem {
                                             switch (editPlayerMenu) {
                                                 //Game Options
                                                 case 1:
-                                                    System.out.println("Number of games the keeper has played: " + player.getGame());
+                                                    System.out.println("Number of games the keeper has played: " + keeper.getGame());
                                                     System.out.println("How many games would you like to add?");
                                                     count = scan.nextInt();
-                                                    player.setGame(count);
+                                                    keeper.setGame(count);
                                                     break;
                                                 case 2:
-                                                    System.out.println("Number of games the keeper has Won: " + player.getGamesWon());
+                                                    System.out.println("Number of games the keeper has Won: " + keeper.getGamesWon());
                                                     System.out.println("How many wins would you like to add?");
                                                     count = scan.nextInt();
-                                                    player.setGamesWon(count);
+                                                    keeper.setGamesWon(count);
                                                     break;
                                                 case 3:
-                                                    System.out.println("Number of games the keeper has Lost: " + player.getGamesLoss());
+                                                    System.out.println("Number of games the keeper has Lost: " + keeper.getGamesLoss());
                                                     System.out.println("How many losses would you like to add?");
                                                     count = scan.nextInt();
-                                                    player.setGamesLoss(count);
+                                                    keeper.setGamesLoss(count);
                                                     break;
                                                 case 4:
-                                                    System.out.println("Number of games the keeper has Tied: " + player.getTies());
+                                                    System.out.println("Number of games the keeper has Tied: " + keeper.getTies());
                                                     System.out.println("How many ties would you like to add?");
                                                     count = scan.nextInt();
-                                                    player.setTies(count);
+                                                    keeper.setTies(count);
                                                     break;
                                                 default:
                                                     System.out.println("Please enter a valid number");
                                                     break;
                                             }
+                                            Util.updatePlayer(keeper);
+                                            continue;
                                         case 6:
                                             //Goals
-                                            System.out.println("Number of goals made by the keeper: " + player.getGoal());
+                                            System.out.println("Number of goals made by the keeper: " + keeper.getGoal());
                                             System.out.println("How many goals would you like to add?");
                                             count = scan.nextInt();
-                                            player.setGoal(count);
+                                            keeper.setGoal(count);
                                             break;
                                         case 7:
-                                            //Goals
-                                            System.out.println("Number of saves made by the keeper: " + player.getGoal());
+                                            //Saves
+                                            System.out.println("Number of saves made by the keeper: " + keeper.getSaves());
                                             System.out.println("How many goals would you like to add?");
                                             count = scan.nextInt();
-                                            //player.setSaves(count); // HVORDAN FAAR MAN FAT I setSaves i keeper?!?!??!
+                                            keeper.setSaves(count);
                                             break;
+                                        case 8:
+                                            //Quit
+                                            continue;
                                         default:
                                             System.out.println("Please enter a valid number");
                                             break;
                                     }
-                                    Util.updatePlayer(player); //Updates player att's
+                                    Util.updatePlayer(keeper); //Updates player att's
 
                                 } else {
+                                    Player player = Util.getPlayer(playerNumber);
                                     System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Goals \n7: Quit");
                                     editPlayerMenu = scan.nextInt();
                                     switch (editPlayerMenu) {
@@ -224,25 +232,25 @@ public class MenuSystem {
                                             switch (editPlayerMenu) {
                                                 //Game Options
                                                 case 1:
-                                                    System.out.println("Number of games the keeper has played: " + player.getGame());
+                                                    System.out.println("Number of games the player has played: " + player.getGame());
                                                     System.out.println("How many games would you like to add?");
                                                     count = scan.nextInt();
                                                     player.setGame(count);
                                                     break;
                                                 case 2:
-                                                    System.out.println("Number of games the keeper has Won: " + player.getGamesWon());
+                                                    System.out.println("Number of games the player has Won: " + player.getGamesWon());
                                                     System.out.println("How many wins would you like to add?");
                                                     count = scan.nextInt();
                                                     player.setGamesWon(count);
                                                     break;
                                                 case 3:
-                                                    System.out.println("Number of games the keeper has Lost: " + player.getGamesLoss());
+                                                    System.out.println("Number of games the player has Lost: " + player.getGamesLoss());
                                                     System.out.println("How many losses would you like to add?");
                                                     count = scan.nextInt();
                                                     player.setGamesLoss(count);
                                                     break;
                                                 case 4:
-                                                    System.out.println("Number of games the keeper has Tied: " + player.getTies());
+                                                    System.out.println("Number of games the player has Tied: " + player.getTies());
                                                     System.out.println("How many ties would you like to add?");
                                                     count = scan.nextInt();
                                                     player.setTies(count);
@@ -251,11 +259,27 @@ public class MenuSystem {
                                                     System.out.println("Please enter a valid number");
                                                     break;
                                             }
+                                            Util.updatePlayer(player);
+                                            continue;
+                                        case 6:
+                                            //Goals
+                                            System.out.println("Number of goals made by the keeper: " + player.getGoal());
+                                            System.out.println("How many goals would you like to add?");
+                                            count = scan.nextInt();
+                                            player.setGoal(count);
+                                            break;
+                                        case 7:
+                                            //Quit
+                                            continue;
+                                        default:
+                                            System.out.println("Please enter a valid number");
+                                            break;
+
                                     }
                                     Util.updatePlayer(player);
 
                                 }
-                                break;
+                                continue;
                             case 4: //Delete player
                                 //TODO Delete player - Lasse
                                 ArrayList<Player> players = new ArrayList<>(Util.loadPlayers());
@@ -271,9 +295,9 @@ public class MenuSystem {
                                 }
                                 String conf = Util.deletePlayer(playerNumber, players);
                                 System.out.println(conf);
-                                break;
+                                continue;
                             case 5:
-                                break;
+                                continue;
                             default:
                                  System.out.println("Please enter a valid number");
                                 continue;
@@ -298,7 +322,7 @@ public class MenuSystem {
                                         day = scan.next();
                                         LocalDate gameDate = LocalDate.parse(day);
                                         Util.createGameUpcommingGame(opposingTeam, gameDate, timeOfGame, opposingTeam);
-                                        break;
+                                        continue;
 
                                     case 2:
                                         System.out.println("Please enter opposing team: ");
@@ -351,12 +375,12 @@ public class MenuSystem {
                                                         String addPlayer = scan.next();
                                                         addMorePlayers = !addPlayer.equalsIgnoreCase("yes");
                                                     }
-                                                    break;
+                                                    continue;
                                                 case "Opposing":
                                                     System.out.println("How many goals for the opposing team?");
                                                     int opposingTeamGoals = scan.nextInt();
                                                     goals.add("0-" + opposingTeamGoals);
-                                                    break;
+                                                    continue;
                                             }
                                         } else {
                                             System.out.println("No goals was added");
@@ -374,7 +398,7 @@ public class MenuSystem {
                                     case 3:
                                         //TODO Edit game code. This is only for the variable gameCanceled in game, no deletion or edit of other att in a game.
                                     case 4:
-                                        break;
+                                        continue;
                                 }
                             case 2:
                                 //TODO Some code for viewing game from file
@@ -401,7 +425,7 @@ public class MenuSystem {
 
                                         }
 
-                                        break;
+                                        continue;
 
                                     case 2:
                                         playedGameFileList = new ArrayList<>(Util.listFilesPlayed());
@@ -424,7 +448,7 @@ public class MenuSystem {
                                         } catch (Exception e) {
 
                                         }
-                                        break;
+                                        continue;
 
                                     default:
                                         System.out.println("Please select a number from the menu!");
@@ -432,13 +456,13 @@ public class MenuSystem {
                                 }
 
                             case 3:
-                                break;
+                                continue;
                             default:
                                 System.out.println("Please enter a valid number");
                                 continue;
                         }
                     case 3:
-                        break;
+                        continue;
 
                     default:
                         System.out.println("Please enter a valid number");
