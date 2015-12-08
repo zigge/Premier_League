@@ -116,7 +116,7 @@ public class Game implements Serializable {
 
     @Override
     public String toString() {
-        return "Chelsea vs  " + getOpposingTeam() + " The Result of the game was: " + getResult() + " and it was played on " + getGameDate() + " at " + getGameTime() + "with the strategy" + getStrategy();
+        return "Chelsea vs  " + getOpposingTeam() + " The Result of the game was: " + getResult() + " and it was played on " + getGameDate() + " at " + getGameTime() + " with the strategy " + getStrategy();
     }
 }
 

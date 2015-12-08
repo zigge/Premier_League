@@ -59,10 +59,10 @@ public class MenuSystem {
                             // Casper, you need to make this check: if (pos > Util.fieldPosition.values().length || pos < 0), if the number is < 4 run else statement. This i when you set the position
                             // Casper, use the methode from Util.createPlayer, to create player. Your task is to make checks and switches for entering data intro the method
 
-                            System.out.println("Enter the first name of the player you want to create:");
+                            System.out.println("Enter the full name of the player you want to create:");
                             scan.nextLine();
                             playerName = scan.nextLine();
-                            System.out.println("Enter the salary for " + playerName + ":");
+                            System.out.println("Enter the weekly salary (in £) for " + playerName + ":");
                             playerSalary = scan.nextInt();
                             System.out.println("Enter the player number for " + playerName + ":");
                             playerNumber = scan.nextInt();
@@ -111,18 +111,18 @@ public class MenuSystem {
                                 switch (editPlayerMenu) {
                                     case 1:
                                         //Name
-                                        System.out.println("What is the keeer's new name?");
+                                        System.out.println("What is the " + keeper.getName() + "'s new name?");
                                         editName = scan.next();
                                         keeper.setName(editName);
                                         break;
                                     case 2:
                                         //Salary
-                                        System.out.println("What is the keeper's new salary?");
+                                        System.out.println("What is the " + keeper.getName() + "'s new weekly salary?");
                                         try {
                                             editSalary = scan.nextInt();
                                             keeper.setSalary(editSalary);
                                         } catch (InputMismatchException e) {
-                                            System.out.println("pls write the Salary in numbers");
+                                            System.out.println("please write the Salary in numbers");
                                         }
                                         break;
                                     case 3:
@@ -133,43 +133,40 @@ public class MenuSystem {
                                             count++;
                                             System.out.println(count + ": " + f.getPositionOnField());
                                         }
-                                        System.out.println("What is the player's new position?");
+                                        System.out.println("What is the " + keeper.getName() + "'s new position?");
                                         editPosition = scan.nextInt();
-                                        keeper.setPosition(editPosition);
+                                        keeper.setPosition(editPosition - 1);
                                         break;
                                     case 4:
                                         //Nationality
-                                        System.out.println("What is the keeper's new nationality?");
+                                        System.out.println("What is the " + keeper.getName() + "'s new nationality?");
                                         editNationality = scan.next();
                                         keeper.setNationality(editNationality);
                                         break;
                                     case 5:
-                                        System.out.println("Please select a game option \n1: Total Games \n2: Games Won \n3: Games Lost \n4: Games Tied");
+                                        System.out.println("Please select a Game Option \n1: Games Won \n2: Games Lost \n3: Games Tied");
                                         editPlayerMenu = scan.nextInt();
                                         switch (editPlayerMenu) {
                                             //Game Options
                                             case 1:
-                                                System.out.println("Number of games the keeper has played: " + keeper.getGame());
-                                                System.out.println("How many games would you like to add?");
-                                                count = scan.nextInt();
-                                                keeper.setGame(count);
-                                                break;
-                                            case 2:
-                                                System.out.println("Number of games the keeper has Won: " + keeper.getGamesWon());
+                                                System.out.println("Number of games " + keeper.getName() + " has won: " + keeper.getGamesWon());
                                                 System.out.println("How many wins would you like to add?");
                                                 count = scan.nextInt();
+                                                keeper.setGame(count);
                                                 keeper.setGamesWon(count);
                                                 break;
-                                            case 3:
-                                                System.out.println("Number of games the keeper has Lost: " + keeper.getGamesLoss());
+                                            case 2:
+                                                System.out.println("Number of games " + keeper.getName() + " has lost: " + keeper.getGamesLoss());
                                                 System.out.println("How many losses would you like to add?");
                                                 count = scan.nextInt();
+                                                keeper.setGame(count);
                                                 keeper.setGamesLoss(count);
                                                 break;
-                                            case 4:
-                                                System.out.println("Number of games the keeper has Tied: " + keeper.getTies());
+                                            case 3:
+                                                System.out.println("Number of games " + keeper.getName() + " has tied: " + keeper.getTies());
                                                 System.out.println("How many ties would you like to add?");
                                                 count = scan.nextInt();
+                                                keeper.setGame(count);
                                                 keeper.setTies(count);
                                                 break;
                                             default:
@@ -180,15 +177,15 @@ public class MenuSystem {
                                         continue;
                                     case 6:
                                         //Goals
-                                        System.out.println("Number of goals made by the keeper: " + keeper.getGoal());
+                                        System.out.println("Number of goals scored by " + keeper.getName() + ": " + keeper.getGoal());
                                         System.out.println("How many goals would you like to add?");
                                         count = scan.nextInt();
                                         keeper.setGoal(count);
                                         break;
                                     case 7:
                                         //Saves
-                                        System.out.println("Number of saves made by the keeper: " + keeper.getSaves());
-                                        System.out.println("How many goals would you like to add?");
+                                        System.out.println("Number of saves made by " + keeper.getName() + ": " + keeper.getSaves());
+                                        System.out.println("How many saves would you like to add?");
                                         count = scan.nextInt();
                                         keeper.setSaves(count);
                                         break;
@@ -203,61 +200,63 @@ public class MenuSystem {
 
                             } else {
                                 Player player = Util.getPlayer(playerNumber);
-                                System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game \n6: Goals \n7: Quit");
+                                System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game Options \n6: Goals \n7: Quit");
                                 editPlayerMenu = scan.nextInt();
                                 switch (editPlayerMenu) {
                                     case 1:
-                                        //                                  Name
-                                        System.out.println("What is the player's new name?");
+                                        //Name
+                                        System.out.println("What is " + player.getName() + "'s new name?");
                                         editName = scan.next();
                                         player.setName(editName);
                                         break;
                                     case 2:
                                         //Salary
-                                        System.out.println("What is the player's new salary?");
+                                        System.out.println("What is " + player.getName() + "'s new weekly salary?");
                                         editSalary = scan.nextInt();
                                         player.setSalary(editSalary);
                                         break;
                                     case 3:
                                         //Position
                                         //TODO Print all the players
-                                        System.out.println("What is the player's new position?");
+                                        System.out.println("What is " + player.getName() + "'s new position?");
+                                        int count = 0;
+                                        for (Util.fieldPosition f : Util.fieldPosition.values()) {
+                                            count++;
+                                            System.out.println(count + ": " + f.getPositionOnField());
+                                        }
                                         editPosition = scan.nextInt();
-                                        player.setPosition(editPosition);
+                                        player.setPosition(editPosition - 1);
                                         break;
                                     case 4:
                                         //Nationality
-                                        System.out.println("What is the player's new nationality?");
+                                        System.out.println("What is " + player.getName() + "'s new nationality?");
                                         editNationality = scan.next();
                                         player.setNationality(editNationality);
                                         break;
                                     case 5:
-                                        System.out.println("Please select a game option \n1: Total Games \n2: Games Won \n3: Games Lost \n4: Games Tied");
+                                        System.out.println("Please select a game option \n1: Games Won \n2: Games Lost \n3: Games Tied");
                                         editPlayerMenu = scan.nextInt();
                                         switch (editPlayerMenu) {
                                             //Game Options
                                             case 1:
-                                                System.out.println("Number of games the player has played: " + player.getGame());
-                                                System.out.println("How many games would you like to add?");
-                                                count = scan.nextInt();
-                                                player.setGame(count);
-                                                break;
-                                            case 2:
-                                                System.out.println("Number of games the player has Won: " + player.getGamesWon());
+                                                System.out.println("Number of games " + player.getName() + " has won: " + player.getGamesWon());
                                                 System.out.println("How many wins would you like to add?");
                                                 count = scan.nextInt();
+                                                player.setGame(count);
                                                 player.setGamesWon(count);
                                                 break;
-                                            case 3:
-                                                System.out.println("Number of games the player has Lost: " + player.getGamesLoss());
+                                            case 2:
+                                                System.out.println("Number of games " + player.getName() + " has lost: " + player.getGamesLoss());
                                                 System.out.println("How many losses would you like to add?");
                                                 count = scan.nextInt();
+                                                player.setGame(count);
                                                 player.setGamesLoss(count);
                                                 break;
-                                            case 4:
-                                                System.out.println("Number of games the player has Tied: " + player.getTies());
+                                            case 3:
+                                                System.out.println("Number of games " + player.getName() + " has tied: " + player.getTies());
                                                 System.out.println("How many ties would you like to add?");
                                                 count = scan.nextInt();
+                                                player.setGame(count);
                                                 player.setTies(count);
                                                 break;
                                             default:
@@ -268,7 +267,7 @@ public class MenuSystem {
                                         continue;
                                     case 6:
                                         //Goals
-                                        System.out.println("Number of goals made by the keeper: " + player.getGoal());
+                                        System.out.println("Number of goals scored by " + player.getName() + ": " + player.getGoal());
                                         System.out.println("How many goals would you like to add?");
                                         count = scan.nextInt();
                                         player.setGoal(count);
@@ -313,7 +312,7 @@ public class MenuSystem {
                     gameMenu = scan.nextInt();
                     switch (gameMenu) {
                         case 1:
-                            System.out.println("Please select an option: \n1: Upcoming game \n2: Create Played game \n3: Cancel Upcoming Game \n4: Quit");
+                            System.out.println("Please select an option: \n1: Upcoming game \n2: Create Played game \n3: Quit");
                             gameSubMenu = scan.nextInt();
                             switch (gameSubMenu) {
                                 case 1:
@@ -331,11 +330,13 @@ public class MenuSystem {
 
                                 case 2:
                                     int opposingTeamGoals = 0;
+                                    int homeGoal = 0;
                                     String resultOfGame = "";
                                     Player player = null;
                                     String typeOfStrategy = "";
                                     LocalDate dateOfGame = null;
                                     LocalTime gameTime = null;
+                                    ArrayList<Integer> playerNumberIntList = new ArrayList<>();
                                     System.out.println("Please enter the opposing team for this game: ");
                                     scan.nextLine();
                                     try {
@@ -362,23 +363,21 @@ public class MenuSystem {
                                     }
                                     try {
                                         int choiseOfStrategy = scan.nextInt();
-                                        System.out.println(countOfStrategies);
                                         if (choiseOfStrategy > Util.strategiesOfGame.values().length || choiseOfStrategy <= 0) {
                                             do {
-                                                System.out.println("invalid choise!");
+                                                System.out.println("invalid choice!");
                                             }
                                             while (choiseOfStrategy > Util.strategiesOfGame.values().length || choiseOfStrategy <= 0);
                                         }
-                                        typeOfStrategy = Util.strategiesOfGame.values()[choiseOfStrategy-1].getStrategies();
+                                        typeOfStrategy = Util.strategiesOfGame.values()[choiseOfStrategy - 1].getStrategies();
                                         System.out.println(typeOfStrategy);
 
                                     } catch (InputMismatchException e) {
 
                                     }
-                                    System.out.println("What players was in the game ? ");
+                                    System.out.println("What players were in the game ? ");
                                     if (Util.viewPlayers()) {
                                         playerNumberString = scan.next(); // There is probably a better way to do this...
-                                        ArrayList<Integer> playerNumberIntList = new ArrayList<>();
                                         ArrayList<String> playerNumberList = new ArrayList<>(Arrays.asList(playerNumberString.split(",")));
                                         playerList = new ArrayList<>();
                                         for (String s : playerNumberList) {
@@ -386,6 +385,7 @@ public class MenuSystem {
                                         }
                                         for (Integer p : playerNumberIntList) {
                                             playerList.add(Util.getPlayer(p));
+
                                         }
                                     } else {
                                         System.out.println("no players in file!");
@@ -393,74 +393,94 @@ public class MenuSystem {
 
 
                                     System.out.println("How many goals for the opposing team? ");
-                                    try {
-                                        opposingTeamGoals = scan.nextInt();
-                                        System.out.println("how many goals for home team");
-                                        int homeGoal = scan.nextInt();
-                                        if (homeGoal != 0) {
-                                            if (homeGoal > opposingTeamGoals) {
-                                                for (Player s : playerList) {
-                                                    s.setGame(1);
-                                                    s.setGamesWon(1);
-                                                }
-                                            } else if (homeGoal == opposingTeamGoals) {
-                                                for (Player s : playerList) {
-                                                    s.setGame(1);
-                                                    s.setTies(1);
-                                                }
-                                            } else {
-                                                for (Player s : playerList) {
-                                                    s.setGame(1);
-                                                    s.setGamesLoss(1);
-                                                }
-                                            }
-                                            while (!addMorePlayers) {
-                                                System.out.println("Add player who scored: ");
-                                                int playerToAddGoals = scan.nextInt();
-                                                System.out.println(playerList.size());
-                                                for (Player p : playerList) {
-                                                    if (p.getPlayerNumber() == playerToAddGoals) {
-                                                        player = p;
-                                                    }
-                                                }
-                                                System.out.println("When did he score ? ");
-                                                try {
-                                                    int goalsToAdd = scan.nextInt();
-                                                    goals.add("Player: " + player.getName() + "Scored at: " + goalsToAdd);
-
-                                                } catch (InputMismatchException e) {
-                                                    scan.nextInt();
-                                                }
-                                                System.out.println("Add more players? yes/no");
-
-                                                String choise = scan.next();
-                                                if (choise.contains("yes")) {
-                                                    addMorePlayers = false;
-                                                } else {
-                                                    addMorePlayers = true;
-                                                }
-
-                                                resultOfGame = homeGoal + " - " + opposingTeamGoals;
+                                    opposingTeamGoals = scan.nextInt();
+                                    System.out.println("How many goals for home team?");
+                                    homeGoal = scan.nextInt();
+                                    if (homeGoal != 0) {
+                                        if (homeGoal > opposingTeamGoals) {
+                                            for (int i =0; i < playerList.size(); i++) {
+                                                 if(Util.getPlayer(playerList.get(i).getPlayerNumber()) instanceof Keeper){
+                                                     Keeper keeperToUpdate = (Keeper) Util.getPlayer(playerList.get(i).getPlayerNumber());
+                                                     keeperToUpdate.setGame(1);
+                                                     keeperToUpdate.setGamesWon(1);
+                                                     Util.updatePlayer(keeperToUpdate);
+                                                }else{
+                                                     Player playerToUpdate = Util.getPlayer(playerList.get(i).getPlayerNumber());
+                                                     playerToUpdate.setGame(1);
+                                                     playerToUpdate.setGamesWon(1);
+                                                     Util.updatePlayer(playerToUpdate);
+                                                 }
                                             }
 
+                                        } else if (homeGoal == opposingTeamGoals) {
+                                            for (int i =0; i < playerList.size(); i++) {
+                                                if(Util.getPlayer(playerList.get(i).getPlayerNumber()) instanceof Keeper){
+                                                    Keeper keeperToUpdate = (Keeper) Util.getPlayer(playerList.get(i).getPlayerNumber());
+                                                    keeperToUpdate.setGame(1);
+                                                    keeperToUpdate.setTies(1);
+                                                    Util.updatePlayer(keeperToUpdate);
+                                                }else{
+                                                    Player playerToUpdate = Util.getPlayer(playerList.get(i).getPlayerNumber());
+                                                    playerToUpdate.setGame(1);
+                                                    playerToUpdate.setTies(1);
+                                                    Util.updatePlayer(playerToUpdate);
+                                                }
+                                            }
                                         } else {
-                                            resultOfGame = homeGoal + "-" + opposingTeamGoals;
-                                            goals.add("No goals for home team");
+                                            for (int i =0; i < playerList.size(); i++) {
+                                                if(Util.getPlayer(playerList.get(i).getPlayerNumber()) instanceof Keeper){
+                                                    Keeper keeperToUpdate = (Keeper) Util.getPlayer(playerList.get(i).getPlayerNumber());
+                                                    keeperToUpdate.setGame(1);
+                                                    keeperToUpdate.setGamesLoss(1);
+                                                    Util.updatePlayer(keeperToUpdate);
+                                                }else{
+                                                    Player playerToUpdate = Util.getPlayer(playerList.get(i).getPlayerNumber());
+                                                    playerToUpdate.setGame(1);
+                                                    playerToUpdate.setGamesLoss(1);
+                                                    Util.updatePlayer(playerToUpdate);
+                                                }
+                                            }
                                         }
-                                    } catch (InputMismatchException e) {
-                                        scan.nextInt();
-                                    }
+                                        while (!addMorePlayers) {
+                                            System.out.println("Add player who scored: ");
+                                            int playerToAddGoals = scan.nextInt();
+                                            for (Player p : playerList) {
+                                                if (p.getPlayerNumber() == playerToAddGoals) {
+                                                    player = p;
+                                                }
+                                            }
+                                            System.out.println("When did he score? ");
+                                            try {
+                                                int goalsToAdd = scan.nextInt();
+                                                goals.add("Player: " + player.getName() + " scored at: " + goalsToAdd);
 
+                                            } catch (InputMismatchException e) {
+                                                scan.nextInt();
+                                            }
+                                            System.out.println("Add more players? yes/no");
+
+                                            String choise = scan.next();
+                                            if (choise.contains("yes")) {
+                                                addMorePlayers = false;
+                                            } else {
+                                                addMorePlayers = true;
+                                            }
+
+                                            resultOfGame = homeGoal + " - " + opposingTeamGoals;
+                                        }
+
+                                    } else {
+                                        resultOfGame = homeGoal + "-" + opposingTeamGoals;
+                                        goals.add("No goals for home team");
+                                    }
                                     Util.createGamePlayed(playerList, opposingTeam, resultOfGame, dateOfGame, gameTime, typeOfStrategy, goals, opposingTeam);
 
-                                case 3:
-                                    //TODO Edit game code. This is only for the variable gameCanceled in game, no deletion or edit of other att in a game.
                                 case 4:
                                     continue;
                             }
                         case 2:
                             //TODO Some code for viewing game from file
-                            System.out.println("What type of game do you want to view ? \n1: Upcomming Game \n2: Played Game");
+                            System.out.println("What type of game do you want to view? \n1: Upcomming Game \n2: Played Game");
                             int choice = scan.nextInt();
                             switch (choice) {
                                 case 1:
@@ -475,7 +495,7 @@ public class MenuSystem {
                                         File file = new File(System.getProperty("user.dir") + "/UpcommingGames/" + fileToDisplayUpcomming + ".txt");
                                         if (file.isFile()) {
                                             Game game = Util.loadGame(file);
-                                            System.out.println("Chelsea FC vs " + game.getOpposingTeam() + " and the game is do " + game.getGameDate() + " at " + game.getGameTime());
+                                            System.out.println("Chelsea FC vs " + game.getOpposingTeam() + " and the game is played " + game.getGameDate() + " at " + game.getGameTime());
 
                                         }
 

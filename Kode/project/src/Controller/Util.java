@@ -282,7 +282,7 @@ public class Util {
         for (Player p : players) {
             if (p.getPlayerNumber() == number) {
                 index = players.indexOf(p);
-                returnStatement = "Player: " + p + " deleted!";
+                returnStatement = "Player: " + p + " has been deleted!";
                 break;
             } else {
                 returnStatement = "Could not find player";
