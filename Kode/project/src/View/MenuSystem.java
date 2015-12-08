@@ -15,12 +15,9 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by lassebjorklund on 21/11/15.
- */
 public class MenuSystem {
     private static Scanner scan;
-    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, playerToDelete, count, playerNumber, editSalary, editPosition, playerSalary, positionMenu, playerPosition;
+    private static int headMenu, playerMenu, gameMenu, gameSubMenu, editPlayerMenu, count, playerNumber, editSalary, editPosition, playerSalary, positionMenu, playerPosition;
     private static String editName, editNationality, opposingTeam, time, playerName, playerNationality, wasThereGolas, day, playerNumberString;
     private static ArrayList<Player> playerList;
     private static ArrayList<String> goals = new ArrayList<>();
@@ -29,17 +26,13 @@ public class MenuSystem {
     private final static String esc = "\u001b[2J";
     private final static String home = "\u001b[H";
 
-
     //Menu run class
+    //----------Casper is responsible for this section---------
     public static void menu() {
-        // try { //One solution, to handle all of the exceptions we get in the program. NOT THE BEST !
         Util.createPlayerFolder();
         Util.createPlayerFile();
         Util.createUpcommingGameFolder();
         Util.createPlayedGamesFolder();
-           /* Util.createKeeper("Test", 2, 0, "Denmark", 1, 1); //TEST PLAYERS
-            Util.createPlayer("Test2", 2, 1, "Denmark", 2); //TEST PLAYERS
-            Util.updatePlayerList();*/
         scan = new Scanner(System.in);
         running = true;
 
@@ -54,11 +47,6 @@ public class MenuSystem {
                     playerMenu = scan.nextInt();
                     switch (playerMenu) {
                         case 1: // Create Player
-                            //TODO Some code for "new player" - Casper
-                            //TODO Open issue: If two playes have the same name, what then?
-                            // Casper, you need to make this check: if (pos > Util.fieldPosition.values().length || pos < 0), if the number is < 4 run else statement. This i when you set the position
-                            // Casper, use the methode from Util.createPlayer, to create player. Your task is to make checks and switches for entering data intro the method
-
                             System.out.println("Enter the full name of the player you want to create:");
                             scan.nextLine();
                             playerName = scan.nextLine();
@@ -75,9 +63,9 @@ public class MenuSystem {
                             System.out.println("2: Midfielder");
                             System.out.println("3: Forward");
                             playerPosition = scan.nextInt();
-                            if (playerPosition <= 3 && playerPosition > 0) {
+                            if (playerPosition <= 3 && playerPosition > 0) { //Checks if player is a field player
                                 Util.createPlayer(playerName, playerSalary, playerPosition, playerNationality, playerNumber);
-                            } else if (playerPosition == 0) {
+                            } else if (playerPosition == 0) { //Checks if player is a keeper
                                 Util.createKeeper(playerName, playerSalary, playerPosition, playerNationality, playerNumber, 0);
                             } else {
                                 System.out.println("An error has occured. You did not select a valid number for the position.");
@@ -86,25 +74,23 @@ public class MenuSystem {
                         case 2: //Show players
                             Util.viewPlayers();
                             try {
-                                TimeUnit.SECONDS.sleep(2);
+                                TimeUnit.SECONDS.sleep(2); //Thread is sleeping for two seconds
                             } catch (Exception e) {
                                 System.out.println(e);
                             }
                             System.out.println(esc + home);
                             continue;
                         case 3: //Edit Player
-                            //TODO Some code for "Edit player" - Henriette
                             Util.viewPlayers();
 
                             System.out.println("Which player do you want to edit?");
                             System.out.println("Player number:");
 
                             playerNumber = scan.nextInt();
-                            //TODO Make match on player, and typecast object to "keeper" like: keeper = (Keeper) Util.getPlayer(playerNumber);
                             System.out.println("What do you want to edit?");
 
                             if (Util.getPlayer(playerNumber).getPosition().equals("Keeper position")) {
-                                Keeper keeper = (Keeper) Util.getPlayer(playerNumber);
+                                Keeper keeper = (Keeper) Util.getPlayer(playerNumber); //Type casts so it is possible to edit saves for a keeper
                                 System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game Options \n6: Goals \n7: Saves \n8: Quit");
                                 editPlayerMenu = scan.nextInt();
 
@@ -173,7 +159,7 @@ public class MenuSystem {
                                                 System.out.println("Please enter a valid number");
                                                 break;
                                         }
-                                        Util.updatePlayer(keeper);
+                                        Util.updatePlayer(keeper); //Can update keeper because of inheritance between keeper and player
                                         continue;
                                     case 6:
                                         //Goals
@@ -196,8 +182,9 @@ public class MenuSystem {
                                         System.out.println("Please enter a valid number");
                                         break;
                                 }
-                                Util.updatePlayer(keeper); //Updates player att's
+                                Util.updatePlayer(keeper); //Updates keeper attributes
 
+                            //------Henriette is responsible for this section--------
                             } else {
                                 Player player = Util.getPlayer(playerNumber);
                                 System.out.println("Please select an option: \n1: Name \n2: Salary \n3: Position \n4: Nationality \n5: Game Options \n6: Goals \n7: Quit");
@@ -217,7 +204,6 @@ public class MenuSystem {
                                         break;
                                     case 3:
                                         //Position
-                                        //TODO Print all the players
                                         System.out.println("What is " + player.getName() + "'s new position?");
                                         int count = 0;
                                         for (Util.fieldPosition f : Util.fieldPosition.values()) {
@@ -285,8 +271,7 @@ public class MenuSystem {
                             }
                             continue;
                         case 4: //Delete player
-                            //TODO Delete player - Lasse
-                            ArrayList<Player> players = new ArrayList<>(Util.loadPlayers());
+                            ArrayList<Player> players = Util.loadPlayers();
                             for (Player p : players) {
                                 System.out.println(p);
                             }
@@ -347,10 +332,10 @@ public class MenuSystem {
                                     System.out.println("Please enter the date for the game: YYYY-MM-DD ");
                                     try {
                                         day = scan.nextLine();
-                                        dateOfGame = LocalDate.parse(day);
+                                        dateOfGame = LocalDate.parse(day); //Converts a string to LocalDate
                                         System.out.println("Please enter the time for the game: HH:MM:SS");
                                         time = scan.nextLine();
-                                        gameTime = LocalTime.parse(time);
+                                        gameTime = LocalTime.parse(time); //Converts a string to LocalTime
                                     } catch (DateTimeParseException e) {
                                         scan.nextLine();
                                     }
@@ -369,7 +354,7 @@ public class MenuSystem {
                                             }
                                             while (choiseOfStrategy > Util.strategiesOfGame.values().length || choiseOfStrategy <= 0);
                                         }
-                                        typeOfStrategy = Util.strategiesOfGame.values()[choiseOfStrategy - 1].getStrategies();
+                                        typeOfStrategy = Util.strategiesOfGame.values()[choiseOfStrategy - 1].getStrategies(); //0 indexed
                                         System.out.println(typeOfStrategy);
 
                                     } catch (InputMismatchException e) {
@@ -377,11 +362,11 @@ public class MenuSystem {
                                     }
                                     System.out.println("What players were in the game ? ");
                                     if (Util.viewPlayers()) {
-                                        playerNumberString = scan.next(); // There is probably a better way to do this...
+                                        playerNumberString = scan.next();
                                         ArrayList<String> playerNumberList = new ArrayList<>(Arrays.asList(playerNumberString.split(",")));
                                         playerList = new ArrayList<>();
                                         for (String s : playerNumberList) {
-                                            playerNumberIntList.add(Integer.parseInt(s));
+                                            playerNumberIntList.add(Integer.parseInt(s)); //Converts string to list of ints
                                         }
                                         for (Integer p : playerNumberIntList) {
                                             playerList.add(Util.getPlayer(p));
@@ -391,15 +376,16 @@ public class MenuSystem {
                                         System.out.println("no players in file!");
                                     }
 
+                                    //--------Lucas is responsible for-----------
 
                                     System.out.println("How many goals for the opposing team? ");
                                     opposingTeamGoals = scan.nextInt();
                                     System.out.println("How many goals for home team?");
                                     homeGoal = scan.nextInt();
                                     if (homeGoal != 0) {
-                                        if (homeGoal > opposingTeamGoals) {
+                                        if (homeGoal > opposingTeamGoals) { //won
                                             for (int i =0; i < playerList.size(); i++) {
-                                                 if(Util.getPlayer(playerList.get(i).getPlayerNumber()) instanceof Keeper){
+                                                 if(Util.getPlayer(playerList.get(i).getPlayerNumber()).getPosition().equalsIgnoreCase("Keeper position")){ //get players position and matches against string "keeper position"
                                                      Keeper keeperToUpdate = (Keeper) Util.getPlayer(playerList.get(i).getPlayerNumber());
                                                      keeperToUpdate.setGame(1);
                                                      keeperToUpdate.setGamesWon(1);
@@ -412,9 +398,9 @@ public class MenuSystem {
                                                  }
                                             }
 
-                                        } else if (homeGoal == opposingTeamGoals) {
+                                        } else if (homeGoal == opposingTeamGoals) { //tied
                                             for (int i =0; i < playerList.size(); i++) {
-                                                if(Util.getPlayer(playerList.get(i).getPlayerNumber()) instanceof Keeper){
+                                                if(Util.getPlayer(playerList.get(i).getPlayerNumber()).getPosition().equalsIgnoreCase("Keeper position")){
                                                     Keeper keeperToUpdate = (Keeper) Util.getPlayer(playerList.get(i).getPlayerNumber());
                                                     keeperToUpdate.setGame(1);
                                                     keeperToUpdate.setTies(1);
@@ -427,8 +413,8 @@ public class MenuSystem {
                                                 }
                                             }
                                         } else {
-                                            for (int i =0; i < playerList.size(); i++) {
-                                                if(Util.getPlayer(playerList.get(i).getPlayerNumber()) instanceof Keeper){
+                                            for (int i =0; i < playerList.size(); i++) { //lost
+                                                if(Util.getPlayer(playerList.get(i).getPlayerNumber()).getPosition().equalsIgnoreCase("Keeper position")){
                                                     Keeper keeperToUpdate = (Keeper) Util.getPlayer(playerList.get(i).getPlayerNumber());
                                                     keeperToUpdate.setGame(1);
                                                     keeperToUpdate.setGamesLoss(1);
@@ -441,7 +427,7 @@ public class MenuSystem {
                                                 }
                                             }
                                         }
-                                        while (!addMorePlayers) {
+                                        while (!addMorePlayers) { //Continue until false
                                             System.out.println("Add player who scored: ");
                                             int playerToAddGoals = scan.nextInt();
                                             for (Player p : playerList) {
@@ -479,7 +465,6 @@ public class MenuSystem {
                                     continue;
                             }
                         case 2:
-                            //TODO Some code for viewing game from file
                             System.out.println("What type of game do you want to view? \n1: Upcomming Game \n2: Played Game");
                             int choice = scan.nextInt();
                             switch (choice) {
@@ -547,10 +532,5 @@ public class MenuSystem {
                     continue;
             }
         }
-       /* }catch (Exception e){
-            System.out.println("input is wrong!");
-            menu();
-        }*/
     }
-
 }

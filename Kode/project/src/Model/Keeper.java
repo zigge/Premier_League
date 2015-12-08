@@ -1,8 +1,7 @@
 package Model;
 
-/**
- * Created by lassebjorklund on 20/11/15.
- */
+//-------Everybody is responsible-------
+
 public class Keeper extends Player {
 
     private int saves;

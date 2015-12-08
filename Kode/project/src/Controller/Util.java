@@ -12,10 +12,8 @@ import Model.Keeper;
 import Model.Player;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
-/**
- * Created by lassebjorklund on 20/11/15.
- * TODO: Complete file
- */
+//-------Lasse is responsible for this section-------
+
 public class Util {
     private static File playerFile, file;
     private static File playerDir = new File("PlayerFile");
@@ -32,7 +30,7 @@ public class Util {
         try {
             loadList = new ArrayList<>(loadPlayers());
             for (Player p : loadList) {
-                if (player.getPlayerNumber() == p.getPlayerNumber() || player.getName().equalsIgnoreCase(p.getName())) {
+                if (player.getPlayerNumber() == p.getPlayerNumber() || player.getName().equalsIgnoreCase(p.getName())) { //Checks for dublicates of "player"
                     isPlayerThere = true;
                 } else {
 
@@ -44,7 +42,7 @@ public class Util {
                 loadList.add(player);
                 savePlayers(loadList);
             }
-        }catch (NullPointerException e ){
+        }catch (NullPointerException e ){ //Handles if null elements in "loadList" is found
             loadList = new ArrayList<>();
             loadList.add(player);
             savePlayers(loadList);
@@ -53,7 +51,7 @@ public class Util {
     }
 
     public static void createKeeper(String name, int salary, int position, String nationality, int playerNumber, int saves) {
-        Keeper keeper = new Keeper(name, salary, position, nationality, playerNumber, saves);
+        Keeper keeper = new Keeper(name, salary, position, nationality, playerNumber, saves); //Check comments in createPlayer
         Boolean isPlayerThere = false;
         try {
             loadList = new ArrayList<>(loadPlayers());
@@ -83,38 +81,32 @@ public class Util {
         if (game != null) {
             if (game.getResult() != null) {
                 try {
+                    //System.getProperty returns the path to the current directory where the program is executed from
                     objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/PlayedGames/" + fileName + " - playedGame.txt")));
                     objout.writeObject(game);
                 } catch (IOException e) {
-                    e.getCause();
-                    e.getMessage();
-                    e.printStackTrace();
+                    e.printStackTrace(); //Prints out error tree
 
                 } finally {
                     try {
                         objout.close();
                     } catch (IOException e) {
-                        e.getCause();
-                        e.getMessage();
                         e.printStackTrace();
                     }
                 }
             } else {
                 try {
+                    //If result is null it is an upcomming game and therefore we use a different directory
                     objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/UpcommingGames/" + fileName + " - upcommingGame.txt")));
                     objout.writeObject(game);
 
                 } catch (IOException e) {
-                    e.getCause();
-                    e.getMessage();
                     e.printStackTrace();
 
                 } finally {
                     try {
                         objout.close();
                     } catch (IOException e) {
-                        e.getCause();
-                        e.getMessage();
                         e.printStackTrace();
                     }
                 }
@@ -131,7 +123,6 @@ public class Util {
             objout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(playerFile))); //File to write to
             objout.writeObject(players); //Writes to file
 
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -146,7 +137,7 @@ public class Util {
     }
 
     public static Boolean viewPlayers() {
-        Boolean playesIsThere = false;
+        Boolean playesIsThere = false; //Checks if there is playes in the playerFile, if true, returns true, else false.
         try {
             ArrayList<Player> tempArray = loadPlayers();
             if (tempArray.size() != 0) {
@@ -158,7 +149,7 @@ public class Util {
             } else {
                 System.out.println("You have no players on your current team");
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException e) { //If null is read.
             System.out.println("Player File is empty! ");
         }
         return playesIsThere;
@@ -166,20 +157,15 @@ public class Util {
 
     public static Game loadGame(File locationOfGame) {
         ObjectInputStream objin = null;
-        //TODO Some code to load "Game"
-        if (locationOfGame.exists()) {
+        if (locationOfGame.exists()) { //Checks the location of the parameter, if true, runs, else do not.
             try {
                 objin = new ObjectInputStream(new BufferedInputStream(new FileInputStream(locationOfGame)));
-                returnGame = (Game) objin.readObject();
+                returnGame = (Game) objin.readObject(); //We have to type cast, to make sure it is the type of object.
 
             } catch (IOException e) {
-                e.getCause();
-                e.getMessage();
                 e.printStackTrace();
 
             } catch (ClassNotFoundException e) {
-                e.getCause();
-                e.getMessage();
                 e.printStackTrace();
 
             } catch (NullPointerException e) {
@@ -188,8 +174,6 @@ public class Util {
                 try {
                     objin.close();
                 } catch (IOException e) {
-                    e.getCause();
-                    e.getMessage();
                     e.printStackTrace();
                 }
             }
@@ -201,7 +185,7 @@ public class Util {
         ObjectInputStream objin = null;
         ArrayList<Player> returnPlayers = null;
         try {
-            if (playerFile.length() != 0) {
+            if (playerFile.length() != 0) { //If the length of the playerFile is !0 says that there is players in the file.
                 objin = new ObjectInputStream(new BufferedInputStream(new FileInputStream(playerFile)));
                 returnPlayers = (ArrayList<Player>) objin.readObject();
             } else {
@@ -230,21 +214,21 @@ public class Util {
     }
 
     public static void createPlayerFolder() {
-        if (!playerDir.exists()) {
+        if (!playerDir.exists()) { //If folder does not exists, create it.
             try {
                 playerDir.mkdir();
             } catch (SecurityException e) {
                 System.err.println("Cannot create folder");
             }
             //Code for saving players to file.
-        } else {
+        } else { // does nothing
 
         }
     }
 
     public static File createPlayerFile() {
         try {
-            playerFile = new File(System.getProperty("user.dir") + "/Playerfile/playerFile" + ".txt"); // OSX/UNIX file system specific location /.../Playerfile
+            playerFile = new File(System.getProperty("user.dir") + "/Playerfile/playerFile" + ".txt"); //Create file in the folder specified
             playerFile.createNewFile();
             return playerFile;
         } catch (IOException e) {
@@ -277,7 +261,7 @@ public class Util {
     }
 
     public static String deletePlayer(int number, ArrayList<Player> players) {
-        int index = -1;
+        int index = -1; //0 indexed
         String returnStatement = "";
         for (Player p : players) {
             if (p.getPlayerNumber() == number) {
@@ -289,18 +273,18 @@ public class Util {
             }
         }
         players.remove(index);
-        savePlayers(players);
+        savePlayers(players); //Calls method savePlayers to update playerFile
 
         return returnStatement;
     }
 
     public static Player getPlayer(int id) {
         Player player = null;
-        ArrayList<Player> tempPlayerList = loadPlayers();
+        ArrayList<Player> tempPlayerList = loadPlayers(); //loadPlayers returns new ArrayList
         for (Player p : tempPlayerList) {
             if (p.getPlayerNumber() == id) {
                 player = p;
-                playerIndex = tempPlayerList.indexOf(p);
+                playerIndex = tempPlayerList.indexOf(p); //Takes the index of the player "p" for the list, for later use
             }
         }
         return player;
@@ -309,7 +293,7 @@ public class Util {
     public static void updatePlayer(Player player) {
         ArrayList<Player> tempArraylist = new ArrayList<>(loadPlayers());
         if (tempArraylist.size() != 0) {
-            tempArraylist.set(playerIndex, player);
+            tempArraylist.set(playerIndex, player); //Updates the player from the parameters given.
             savePlayers(tempArraylist);
             tempArraylist.clear();
         } else {
@@ -334,7 +318,7 @@ public class Util {
         ArrayList<String> filterFilenames = new ArrayList<>();
         ArrayList<String> fileNameArray = new ArrayList<>(Arrays.asList(upcommingGamesDir.list())); // Gets the contents of the folder
         for (String f : fileNameArray) {
-            if (f.endsWith(".txt")) {
+            if (f.endsWith(".txt")) { //returns list of elements ending ".txt".
                 filterFilenames.add(f); // adds strings with the ending ".txt" to filter output to user.
             }
         }
@@ -367,7 +351,7 @@ public class Util {
 
         public String getPositionOnField() {
             return positionOnField;
-        }
+        } //Returns the string rep of the enum.
 
         fieldPosition(String positionOnField) {
             this.positionOnField = positionOnField;

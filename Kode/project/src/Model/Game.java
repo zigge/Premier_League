@@ -7,10 +7,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//-------Everybody is responsible-------
 
-/**
- * Created by lassebjorklund on 21/11/15.
- */
 public class Game implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,21 +19,20 @@ public class Game implements Serializable {
     private String result;
     private LocalDate gameDate;
     private LocalTime gameTime;
-    private boolean gameCanceled;
 
-//    TODO: Verify this constructor
+    //Constructor for played game
     public Game(ArrayList<Player> player, String opposingTeam, String result, LocalDate gameDate, LocalTime gameTime, String strategy, ArrayList<String> goals) {
-//    TODO: Fill out constructor for game
         this.opposingTeam = opposingTeam;
         this.result = result;
         this.gameDate = gameDate;
         this.gameTime = gameTime;
         this.strategy = strategy;
         players = player;
-        setGoals(goals);
+        this.goals = goals;
 
     }
-//    TODO: Verify this constructor
+
+    //Constructor for upcomming game
     public Game(String opposingTeam, LocalDate gameDate, LocalTime gameTime) {
         this.opposingTeam = opposingTeam;
         this.gameDate = gameDate;
@@ -48,6 +45,14 @@ public class Game implements Serializable {
         }
     }
 
+    public LocalDate getGameDate() {
+        return gameDate;
+    }
+
+    public String getStrategy() {
+        return strategy;
+    }
+
     public String getOpposingTeam() {
         return opposingTeam;
     }
@@ -58,6 +63,12 @@ public class Game implements Serializable {
 
     public LocalTime getGameTime() {
         return gameTime;
+    }
+
+    public void getGoals() {
+        for(String s: goals){
+            System.out.println(s);
+        }
     }
 
     public void setPlayers(ArrayList<Player> players) {
@@ -80,38 +91,12 @@ public class Game implements Serializable {
         this.gameDate = gameDate;
     }
 
-    public LocalDate getGameDate() {
-        return gameDate;
-    }
-
-    public void setGameCanceled(boolean gameCanceled) {
-        this.gameCanceled = gameCanceled;
-    }
-
-    public String getStrategy() {
-        return strategy;
-    }
-
     public void setStrategy(String strategy) {
         this.strategy = strategy;
     }
 
-    public boolean isGameCanceled() {
-        return gameCanceled;
-    }
-
     public void setGoals(ArrayList<String> goals) {
-        if(goals.size() != 0){
             this.goals = goals;
-        }else{
-            System.out.println("The score of the game was 0-0");
-        }
-    }
-
-    public void getGoals() {
-        for(String s: goals){
-            System.out.println(s);
-        }
     }
 
     @Override

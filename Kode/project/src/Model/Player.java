@@ -4,12 +4,12 @@ import Controller.Util;
 
 import java.io.Serializable;
 
-/**
- * Created by lassebjorklund on 20/11/15.
- */
+//-------Everybody is responsible-------
+
 public class Player implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    //Instance Variables
+    private static final long serialVersionUID = 1L; //To secure that this program can open the files it makes
     private String name;
     private int salary;
     private String position;
@@ -25,7 +25,7 @@ public class Player implements Serializable {
 
         this.name = name;
         this.salary = salary;
-        setPosition(position); // Sets position number -> 1 = "Forward position" with a call to methode "setPosition()"
+        setPosition(position); // Sets position number -> 1 = "Forward position" with a call to method "setPosition()"
         this.nationality = nationality;
         this.playerNumber = playerNumber;
     }
@@ -81,7 +81,6 @@ public class Player implements Serializable {
 
     }
 
-    //Before this method is called, call a method that displays positions on field!!!
     public void setPosition(int pos){// Takes an int, which is the position number from the constructor: Position: int
 
             position = Util.fieldPosition.values()[pos].getPositionOnField();
@@ -105,7 +104,7 @@ public class Player implements Serializable {
 
     public void setGame(int game) {
 
-        this.game += game;
+        this.game += game; //Adds one to game
 
     }
 
